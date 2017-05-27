@@ -52,6 +52,7 @@ const createFaxeEvent = () => ({
 	titleImage: createTitleImage(),
 	video: createVideo(),
 	selected: false,
+	hovered: false,
 	externalLinks: casual.array_of_words(casual.integer(0, 5)).map(() => casual.url),
 
 });

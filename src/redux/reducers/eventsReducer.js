@@ -8,6 +8,12 @@ export default (events = [], action = {}) => {
 			selected: action.payload.id === event.id,
 		}));
 	}
+	case types.SET_HOVERED_STATUS:
+		return events.map((event) => ({
+			...event,
+			hovered: action.payload.id === event.id &&
+				action.payload.status,
+		}));
 	default:
 		return events;
 	}

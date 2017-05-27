@@ -8,13 +8,22 @@ const EventsListItem = ({
 	id,
 	title,
 	selected,
+	hovered,
 	onClick,
+	onMouseEnter,
+	onMouseLeave,
 }) => (
 	<button
 		className="events-list-item"
 		id={`events-list-item-${id}`}
-		onClick={() => onClick(id)}
-		style={{ color: selected ? 'blue' : 'red' }}
+		onClick={onClick}
+		onMouseEnter={onMouseEnter}
+		onMouseLeave={onMouseLeave}
+		/* eslint-disable no-nested-ternary */
+		style={{ color: selected ? 'blue' : (
+			hovered ? 'green' : 'red'
+		) }}
+		/* eslint-enable no-nested-ternary */
 	>
 		<h4>
 			{title}
@@ -26,7 +35,10 @@ EventsListItem.propTypes = {
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	selected: PropTypes.bool.isRequired,
+	hovered: PropTypes.bool.isRequired,
 	onClick: PropTypes.func.isRequired,
+	onMouseEnter: PropTypes.func.isRequired,
+	onMouseLeave: PropTypes.func.isRequired,
 };
 
 const EventsList = ({ events, actions }) => (
@@ -35,7 +47,9 @@ const EventsList = ({ events, actions }) => (
 			<EventsListItem
 				{...event}
 				key={event.id}
-				onClick={actions.selectEvent}
+				onClick={() => actions.selectEvent(event.id)}
+				onMouseEnter={() => actions.setHoveredStatus(event.id, true)}
+				onMouseLeave={() => actions.setHoveredStatus(event.id, false)}
 			/>
 		))}
 	</div>
