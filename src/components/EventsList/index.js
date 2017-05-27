@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { combineCssClasses } from '../../helpers/styleHelper';
 import * as eventsActions from '../../redux/actions/eventsActions';
 
 const EventsListItem = ({
@@ -11,7 +12,11 @@ const EventsListItem = ({
 	...rest
 }) => (
 	<button
-		className="events-list-item"
+		className={combineCssClasses({
+			'events-list-item': true,
+			hovered,
+			selected,
+		})}
 		id={`events-list-item-${id}`}
 		{...rest}
 		/* eslint-disable no-nested-ternary */
