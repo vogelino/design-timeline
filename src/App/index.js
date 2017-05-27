@@ -4,7 +4,7 @@ import EventsList from '../components/EventsList';
 import Sidebar from '../components/Sidebar';
 
 const App = () => (
-	<div className="app-container">
+	<div className="appContainer">
 		<Sidebar />
 		<EventsList />
 	</div>
