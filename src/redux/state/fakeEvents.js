@@ -39,6 +39,19 @@ const createFaxeEvent = () => ({
 	data: {
 		title: casual.title,
 		text: casual.text,
+		category: casual.random_element([
+			'design-thinking',
+			'big-data',
+			'data-literacy',
+			'design-attitude',
+			'new-work',
+			'filter-bubble',
+			'privacy-monitoring-tracking',
+			'critical-speculative-fiction-design',
+			'artificial-intelligence-deep-learning-machine-learning',
+			'portfolio-businessmodel-job-offers',
+			'interface-interaction-service-social-sustainable-business-strategy-design',
+		]),
 		types: casual.random_element([
 			'event',
 			'text',
