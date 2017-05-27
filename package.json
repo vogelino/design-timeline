@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"description": "A timeline showing the evolution of design fields over time",
 	"main": "false",
+	"engines": {
+		"node": "7.10.0",
+		"yarn": "0.24.4"
+	},
 	"dependencies": {
 		"react": "^15.5.4",
 		"react-dom": "^15.5.4"
