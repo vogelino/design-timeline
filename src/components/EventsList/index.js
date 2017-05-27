@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { combineCssClasses } from '../../helpers/styleHelper';
 import * as eventsActions from '../../redux/actions/eventsActions';
+import './EventsList.css';
 
 const EventsListItem = ({
 	id,
@@ -13,17 +14,12 @@ const EventsListItem = ({
 }) => (
 	<button
 		className={combineCssClasses({
-			'events-list-item': true,
-			hovered,
-			selected,
+			'events-list_item': true,
+			'events-list_item--hovered': hovered,
+			'events-list_item--selected': selected,
 		})}
-		id={`events-list-item-${id}`}
+		id={id}
 		{...rest}
-		/* eslint-disable no-nested-ternary */
-		style={{ color: selected ? 'blue' : (
-			hovered ? 'green' : 'red'
-		) }}
-		/* eslint-enable no-nested-ternary */
 	>
 		<h4>
 			{title}
