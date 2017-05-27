@@ -36,25 +36,28 @@ const createVideo = () => ({
 
 const createFaxeEvent = () => ({
 	id: uuid(),
-	title: casual.title,
-	text: casual.text,
-	types: casual.random_element([
-		'event',
-		'text',
-		'video',
-		'image',
-		'social',
-		'quote',
-		'audio',
-	]),
-	startDate: casual.date('YYYY-MM-DD'),
-	endDate: null,
-	titleImage: createTitleImage(),
-	video: createVideo(),
-	selected: false,
-	hovered: false,
-	externalLinks: casual.array_of_words(casual.integer(0, 5)).map(() => casual.url),
-
+	data: {
+		title: casual.title,
+		text: casual.text,
+		types: casual.random_element([
+			'event',
+			'text',
+			'video',
+			'image',
+			'social',
+			'quote',
+			'audio',
+		]),
+		startDate: casual.date('YYYY-MM-DD'),
+		endDate: null,
+		titleImage: createTitleImage(),
+		video: createVideo(),
+		externalLinks: casual.array_of_words(casual.integer(0, 5)).map(() => casual.url),
+	},
+	state: {
+		selected: false,
+		hovered: false,
+	},
 });
 
 const eventsInitalState = casual.array_of_words(

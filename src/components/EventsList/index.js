@@ -6,19 +6,14 @@ import * as eventsActions from '../../redux/actions/eventsActions';
 
 const EventsListItem = ({
 	id,
-	title,
-	selected,
-	hovered,
-	onClick,
-	onMouseEnter,
-	onMouseLeave,
+	data: { title },
+	state: { selected, hovered },
+	...rest
 }) => (
 	<button
 		className="events-list-item"
 		id={`events-list-item-${id}`}
-		onClick={onClick}
-		onMouseEnter={onMouseEnter}
-		onMouseLeave={onMouseLeave}
+		{...rest}
 		/* eslint-disable no-nested-ternary */
 		style={{ color: selected ? 'blue' : (
 			hovered ? 'green' : 'red'
@@ -33,12 +28,13 @@ const EventsListItem = ({
 
 EventsListItem.propTypes = {
 	id: PropTypes.string.isRequired,
-	title: PropTypes.string.isRequired,
-	selected: PropTypes.bool.isRequired,
-	hovered: PropTypes.bool.isRequired,
-	onClick: PropTypes.func.isRequired,
-	onMouseEnter: PropTypes.func.isRequired,
-	onMouseLeave: PropTypes.func.isRequired,
+	data: PropTypes.shape({
+		title: PropTypes.string.isRequired,
+	}).isRequired,
+	state: PropTypes.shape({
+		selected: PropTypes.bool.isRequired,
+		hovered: PropTypes.bool.isRequired,
+	}).isRequired,
 };
 
 const EventsList = ({ events, actions }) => (
@@ -59,8 +55,13 @@ EventsList.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
-			title: PropTypes.string.isRequired,
-			selected: PropTypes.bool.isRequired,
+			data: PropTypes.shape({
+				title: PropTypes.string.isRequired,
+			}).isRequired,
+			state: PropTypes.shape({
+				selected: PropTypes.bool.isRequired,
+				hovered: PropTypes.bool.isRequired,
+			}).isRequired,
 		}),
 	).isRequired,
 	actions: PropTypes.shape({

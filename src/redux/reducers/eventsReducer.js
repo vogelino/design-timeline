@@ -5,14 +5,20 @@ export default (events = [], action = {}) => {
 	case types.SELECT_EVENT: {
 		return events.map((event) => ({
 			...event,
-			selected: action.payload.id === event.id,
+			state: {
+				...event.state,
+				selected: action.payload.id === event.id,
+			},
 		}));
 	}
 	case types.SET_HOVERED_STATUS:
 		return events.map((event) => ({
 			...event,
-			hovered: action.payload.id === event.id &&
-				action.payload.status,
+			state: {
+				...event.state,
+				hovered: action.payload.id === event.id &&
+					action.payload.status,
+			},
 		}));
 	default:
 		return events;
