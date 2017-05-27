@@ -8,8 +8,12 @@
 		"yarn": "0.24.4"
 	},
 	"dependencies": {
+		"casual-cjs": "^1.5.10",
 		"react": "^15.5.4",
-		"react-dom": "^15.5.4"
+		"react-dom": "^15.5.4",
+		"react-redux": "^5.0.5",
+		"redux": "^3.6.0",
+		"uuid": "^3.0.1"
 	},
 	"devDependencies": {
 		"babel-eslint": "^7.2.3",
