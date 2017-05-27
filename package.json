@@ -1,18 +1,29 @@
 {
-  "name": "design-timeline",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.6"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+	"name": "design-timeline",
+	"version": "1.0.0",
+	"description": "A timeline showing the evolution of design fields over time",
+	"main": "false",
+	"dependencies": {
+		"react": "^15.5.4",
+		"react-dom": "^15.5.4"
+	},
+	"devDependencies": {
+		"react-scripts": "1.0.6"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vogelino/design-timeline.git"
+	},
+	"author": "Lucas Vogel <contact@vogelino.com> (http://vogelino.com/)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/vogelino/design-timeline/issues"
+	},
+	"homepage": "https://github.com/vogelino/design-timeline#readme"
 }
