@@ -11,6 +11,7 @@ const EventsLaneItem = ({
 	data: { title, startDate },
 	state: { selected, hovered },
 	scaleFunc,
+	color,
 	...rest
 }) => (
 	<button
@@ -20,7 +21,10 @@ const EventsLaneItem = ({
 			'events-lane_item--selected': selected,
 		})}
 		id={id}
-		style={{ left: scaleFunc(startDate) + 200 }}
+		style={{
+			left: scaleFunc(startDate) + 200,
+			color,
+		}}
 		{...rest}
 	>
 		<h4>
@@ -39,9 +43,16 @@ EventsLaneItem.propTypes = {
 		hovered: PropTypes.bool.isRequired,
 	}).isRequired,
 	scaleFunc: PropTypes.func.isRequired,
+	color: PropTypes.string.isRequired,
 };
 
-const EventsLane = ({ events, actions, className, scaleFunc }) => (
+const EventsLane = ({
+	events,
+	actions,
+	className,
+	scaleFunc,
+	color,
+}) => (
 	<div
 		className={combineCssClasses({
 			'events-lane': true,
@@ -56,6 +67,7 @@ const EventsLane = ({ events, actions, className, scaleFunc }) => (
 				onMouseEnter={() => actions.setHoveredStatus(event.id, true)}
 				onMouseLeave={() => actions.setHoveredStatus(event.id, false)}
 				scaleFunc={scaleFunc}
+				color={color}
 			/>
 		))}
 	</div>
@@ -83,6 +95,7 @@ EventsLane.propTypes = {
 	}).isRequired,
 	className: PropTypes.string,
 	scaleFunc: PropTypes.func.isRequired,
+	color: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, { events, scaleFunc }) => ({

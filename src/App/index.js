@@ -6,21 +6,7 @@ import './App.css';
 import EventsList from '../components/EventsList';
 import Sidebar from '../components/Sidebar';
 
-const categories = [
-	'design-thinking',
-	'big-data',
-	'data-literacy',
-	'design-attitude',
-	'new-work',
-	'filter-bubble',
-	'privacy-monitoring-tracking',
-	'critical-speculative-fiction-design',
-	'artificial-intelligence-deep-learning-machine-learning',
-	'portfolio-businessmodel-job-offers',
-	'interface-interaction-service-social-sustainable-business-strategy-design',
-];
-
-const App = ({ events }) => {
+const App = ({ events, categories }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
@@ -30,20 +16,23 @@ const App = ({ events }) => {
 	]).range([0, 4000]);
 
 	const lanes = categories.map((category) => ({
-		laneSlug: category,
+		laneTitle: category.title,
+		laneSlug: category.slug,
+		laneColor: category.color,
 		laneEvents: events.filter(({ data: { category: eventCategory } }) =>
-			category === eventCategory),
+			category.slug === eventCategory),
 	}));
 	return (
 		<div className="appContainer">
 			<Sidebar />
 			<ul className="events-lanes">
-				{lanes.map(({ laneSlug, laneEvents }) => (
+				{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
 					<EventsList
 						key={laneSlug}
 						className={laneSlug}
 						events={laneEvents}
 						scaleFunc={scaleFunc}
+						color={laneColor}
 					/>
 				))}
 			</ul>
@@ -55,8 +44,15 @@ App.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({ id: PropTypes.string.isRequired }),
 	).isRequired,
+	categories: PropTypes.arrayOf(
+		PropTypes.shape({
+			title: PropTypes.string.isRequired,
+			slug: PropTypes.string.isRequired,
+			color: PropTypes.string.isRequired,
+		}),
+	).isRequired,
 };
 
-const mapStateToProps = (({ events }) => ({ events }));
+const mapStateToProps = (({ events, categories }) => ({ events, categories }));
 
 export default connect(mapStateToProps)(App);
