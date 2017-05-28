@@ -6,7 +6,7 @@ import { combineCssClasses } from '../../helpers/styleHelper';
 import * as eventsActions from '../../redux/actions/eventsActions';
 import './EventsList.css';
 
-const EventsListItem = ({
+const EventsLaneItem = ({
 	id,
 	data: { title },
 	state: { selected, hovered },
@@ -14,9 +14,9 @@ const EventsListItem = ({
 }) => (
 	<button
 		className={combineCssClasses({
-			'events-list_item': true,
-			'events-list_item--hovered': hovered,
-			'events-list_item--selected': selected,
+			'events-lane_item': true,
+			'events-lane_item--hovered': hovered,
+			'events-lane_item--selected': selected,
 		})}
 		id={id}
 		{...rest}
@@ -27,7 +27,7 @@ const EventsListItem = ({
 	</button>
 );
 
-EventsListItem.propTypes = {
+EventsLaneItem.propTypes = {
 	id: PropTypes.string.isRequired,
 	data: PropTypes.shape({
 		title: PropTypes.string.isRequired,
@@ -38,10 +38,15 @@ EventsListItem.propTypes = {
 	}).isRequired,
 };
 
-const EventsList = ({ events, actions }) => (
-	<div className="events-list">
+const EventsLane = ({ events, actions, className }) => (
+	<div
+		className={combineCssClasses({
+			'events-lane': true,
+			[className]: className,
+		})}
+	>
 		{events.map((event) => (
-			<EventsListItem
+			<EventsLaneItem
 				{...event}
 				key={event.id}
 				onClick={() => actions.selectEvent(event.id)}
@@ -52,7 +57,11 @@ const EventsList = ({ events, actions }) => (
 	</div>
 );
 
-EventsList.propTypes = {
+EventsLane.defaultProps = {
+	className: '',
+};
+
+EventsLane.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
@@ -68,10 +77,11 @@ EventsList.propTypes = {
 	actions: PropTypes.shape({
 		selectEvent: PropTypes.func.isRequired,
 	}).isRequired,
+	className: PropTypes.string,
 };
 
-const mapStateToProps = ({ events }) => ({ events });
+const mapStateToProps = (state, { events }) => ({ events });
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(eventsActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(EventsList);
+export default connect(mapStateToProps, mapDispatchToProps)(EventsLane);

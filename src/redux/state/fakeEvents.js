@@ -74,7 +74,7 @@ const createFaxeEvent = () => ({
 });
 
 const eventsInitalState = casual.array_of_words(
-	casual.integer(20, 40),
+	casual.integer(60, 120),
 ).map(createFaxeEvent);
 
 export default eventsInitalState;
