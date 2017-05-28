@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { scaleTime } from 'd3-scale';
 import './App.css';
 import EventsList from '../components/EventsList';
 import Sidebar from '../components/Sidebar';
@@ -20,6 +21,14 @@ const categories = [
 ];
 
 const App = ({ events }) => {
+	const eventsByDate = events.sort((evt1, evt2) =>
+		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
+	);
+	const scaleFunc = scaleTime().domain([
+		eventsByDate[0].data.startDate,
+		eventsByDate[events.length - 1].data.startDate,
+	]).range([0, 4000]);
+
 	const lanes = categories.map((category) => ({
 		laneSlug: category,
 		laneEvents: events.filter(({ data: { category: eventCategory } }) =>
@@ -34,6 +43,7 @@ const App = ({ events }) => {
 						key={laneSlug}
 						className={laneSlug}
 						events={laneEvents}
+						scaleFunc={scaleFunc}
 					/>
 				))}
 			</ul>

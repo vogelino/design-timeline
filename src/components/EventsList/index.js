@@ -8,8 +8,9 @@ import './EventsList.css';
 
 const EventsLaneItem = ({
 	id,
-	data: { title },
+	data: { title, startDate },
 	state: { selected, hovered },
+	scaleFunc,
 	...rest
 }) => (
 	<button
@@ -19,6 +20,7 @@ const EventsLaneItem = ({
 			'events-lane_item--selected': selected,
 		})}
 		id={id}
+		style={{ left: scaleFunc(startDate) + 200 }}
 		{...rest}
 	>
 		<h4>
@@ -36,9 +38,10 @@ EventsLaneItem.propTypes = {
 		selected: PropTypes.bool.isRequired,
 		hovered: PropTypes.bool.isRequired,
 	}).isRequired,
+	scaleFunc: PropTypes.func.isRequired,
 };
 
-const EventsLane = ({ events, actions, className }) => (
+const EventsLane = ({ events, actions, className, scaleFunc }) => (
 	<div
 		className={combineCssClasses({
 			'events-lane': true,
@@ -52,6 +55,7 @@ const EventsLane = ({ events, actions, className }) => (
 				onClick={() => actions.selectEvent(event.id)}
 				onMouseEnter={() => actions.setHoveredStatus(event.id, true)}
 				onMouseLeave={() => actions.setHoveredStatus(event.id, false)}
+				scaleFunc={scaleFunc}
 			/>
 		))}
 	</div>
@@ -78,9 +82,13 @@ EventsLane.propTypes = {
 		selectEvent: PropTypes.func.isRequired,
 	}).isRequired,
 	className: PropTypes.string,
+	scaleFunc: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, { events }) => ({ events });
+const mapStateToProps = (state, { events, scaleFunc }) => ({
+	events,
+	scaleFunc,
+});
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(eventsActions, dispatch),
 });

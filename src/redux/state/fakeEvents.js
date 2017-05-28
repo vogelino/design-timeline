@@ -61,7 +61,7 @@ const createFaxeEvent = () => ({
 			'quote',
 			'audio',
 		]),
-		startDate: casual.date('YYYY-MM-DD'),
+		startDate: new Date(casual.date('YYYY-MM-DD')),
 		endDate: null,
 		titleImage: createTitleImage(),
 		video: createVideo(),
