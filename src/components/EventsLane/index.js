@@ -62,5 +62,6 @@ EventsLanes.propTypes = {
 	).isRequired,
 };
 
+export const EventsLanesModule = EventsLanes;
 const mapStateToProps = ({ events, categories }) => ({ events, categories });
 export default connect(mapStateToProps)(EventsLanes);

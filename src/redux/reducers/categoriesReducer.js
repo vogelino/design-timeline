@@ -1,4 +1,4 @@
-const initialCategories = [
+export const initialCategories = [
 	{
 		title: 'design-thinking',
 		slug: 'design-thinking',

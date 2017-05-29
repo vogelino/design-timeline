@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import { combineCssClasses } from '../../helpers/styleHelper';
 import './Sidebar.css';
 
-const SidebarContent = ({
+export const SidebarContent = ({
 	id,
 	data: {
 		title,
@@ -27,13 +27,13 @@ SidebarContent.propTypes = {
 	}).isRequired,
 };
 
-const SelectMessage = () => (
+export const SelectMessage = () => (
 	<div className="sidebar_selectMessage">
 		Please select an item to view its content
 	</div>
 );
 
-const Sidebar = ({ selectedEvent }) => (
+export const Sidebar = ({ selectedEvent }) => (
 	<div className="sidebar">
 		{!selectedEvent ?
 			<SelectMessage /> : <SidebarContent {...selectedEvent} />}

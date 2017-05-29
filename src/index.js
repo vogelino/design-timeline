@@ -8,11 +8,11 @@ import App from './App';
 import './index.css';
 
 const store = configureStore({ events: fakeEvents });
-ReactDOM.render(
-	(
-		<Provider store={store}>
-			<App />
-		</Provider>
-	),
-	document.getElementById('root'),
+export const AppContainer = () => (
+	<Provider store={store}>
+		<App />
+	</Provider>
 );
+if (document.body.contains(document.getElementById('root'))) {
+	ReactDOM.render(<AppContainer />, document.getElementById('root'));
+}

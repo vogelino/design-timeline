@@ -6,7 +6,7 @@ import { combineCssClasses } from '../../helpers/styleHelper';
 import * as eventsActions from '../../redux/actions/eventsActions';
 import EventsLaneItem from './EventsLaneItem';
 
-const EventsLane = ({
+export const EventsLane = ({
 	events,
 	actions,
 	className,
