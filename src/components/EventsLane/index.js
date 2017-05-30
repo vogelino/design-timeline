@@ -5,18 +5,21 @@ import { scaleTime } from 'd3-scale';
 import EventsLane from './EventsLane';
 import './EventsLane.css';
 
+const ZOOM_BASE_PX = 4000;
 
 export const EventsLanesComponent = ({
 	events,
 	categories,
+	zoom: zoomPercentageLevel,
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
+	const maxValue = ZOOM_BASE_PX * (zoomPercentageLevel / 100);
 	const scaleFunc = scaleTime().domain([
 		eventsByDate[0].data.startDate,
 		eventsByDate[events.length - 1].data.startDate,
-	]).range([0, 4000]);
+	]).range([0, maxValue]);
 
 	const lanes = categories.map((category) => ({
 		laneTitle: category.title,
@@ -34,6 +37,7 @@ export const EventsLanesComponent = ({
 					events={laneEvents}
 					scaleFunc={scaleFunc}
 					color={laneColor}
+					width={maxValue}
 				/>
 			))}
 		</div>
@@ -60,7 +64,8 @@ EventsLanesComponent.propTypes = {
 			color: PropTypes.string.isRequired,
 		}),
 	).isRequired,
+	zoom: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ events, categories }) => ({ events, categories });
+const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });
 export default connect(mapStateToProps)(EventsLanesComponent);

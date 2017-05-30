@@ -12,6 +12,7 @@ it('renders without crashing', () => {
 			actions={actions}
 			scaleFunc={(x) => x}
 			color={'#BADA55'}
+			width={4000}
 		/>
 	);
 });

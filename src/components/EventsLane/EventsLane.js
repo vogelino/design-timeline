@@ -12,12 +12,14 @@ export const EventsLaneComponent = ({
 	className,
 	scaleFunc,
 	color,
+	width,
 }) => (
 	<div
 		className={combineCssClasses({
 			'events-lane': true,
 			[className]: className,
 		})}
+		style={{ width }}
 	>
 		{events.map((event) => (
 			<EventsLaneItem
@@ -56,13 +58,10 @@ EventsLaneComponent.propTypes = {
 	className: PropTypes.string,
 	scaleFunc: PropTypes.func.isRequired,
 	color: PropTypes.string.isRequired,
+	width: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state, { events, scaleFunc }) => ({
-	events,
-	scaleFunc,
-});
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(eventsActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(EventsLaneComponent);
+export default connect(null, mapDispatchToProps)(EventsLaneComponent);
