@@ -1,11 +1,13 @@
 import React from 'react';
 import EventsLanes from '../components/EventsLane';
-import MainSidebar from '../components/Sidebar';
+import ZoomControl from '../components/ZoomControl';
+import Sidebar from '../components/Sidebar';
 import './App.css';
 
 const App = () => (
 	<div className="appContainer">
-		<MainSidebar />
+		<Sidebar />
+		<ZoomControl />
 		<EventsLanes />
 	</div>
 );

@@ -10,7 +10,7 @@ it('renders without crashing', () => {
 		<EventsLanesComponent
 			events={eventsInitalState}
 			categories={initialCategories}
-			zoom={100}
+			zoom={{ level: 100 }}
 		/>
 	);
 });

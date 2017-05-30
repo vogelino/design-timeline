@@ -10,7 +10,7 @@ const ZOOM_BASE_PX = 4000;
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	zoom: zoomPercentageLevel,
+	zoom: { level: zoomPercentageLevel },
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
@@ -64,7 +64,9 @@ EventsLanesComponent.propTypes = {
 			color: PropTypes.string.isRequired,
 		}),
 	).isRequired,
-	zoom: PropTypes.number.isRequired,
+	zoom: PropTypes.shape({
+		level: PropTypes.number.isRequired,
+	}),
 };
 
 const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });

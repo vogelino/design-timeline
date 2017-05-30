@@ -1,0 +1,5 @@
+.zoomControl {
+	position: absolute;
+	left: 320px;
+	z-index: 1;
+}
