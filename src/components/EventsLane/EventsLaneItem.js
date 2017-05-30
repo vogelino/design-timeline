@@ -21,12 +21,9 @@ const EventsLaneItem = ({
 			left: scaleFunc(startDate) + 200,
 			color,
 		}}
+		title={title}
 		{...rest}
-	>
-		<h4>
-			{title}
-		</h4>
-	</button>
+	/>
 );
 
 EventsLaneItem.propTypes = {
