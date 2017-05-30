@@ -6,7 +6,7 @@ import { combineCssClasses } from '../../helpers/styleHelper';
 import * as eventsActions from '../../redux/actions/eventsActions';
 import EventsLaneItem from './EventsLaneItem';
 
-export const EventsLane = ({
+export const EventsLaneComponent = ({
 	events,
 	actions,
 	className,
@@ -33,11 +33,11 @@ export const EventsLane = ({
 	</div>
 );
 
-EventsLane.defaultProps = {
+EventsLaneComponent.defaultProps = {
 	className: '',
 };
 
-EventsLane.propTypes = {
+EventsLaneComponent.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
@@ -65,4 +65,4 @@ const mapStateToProps = (state, { events, scaleFunc }) => ({
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(eventsActions, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(EventsLane);
+export default connect(mapStateToProps, mapDispatchToProps)(EventsLaneComponent);

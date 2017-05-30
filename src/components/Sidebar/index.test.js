@@ -1,7 +1,7 @@
 /* global test */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Sidebar, SidebarContent, SelectMessage } from './index';
+import { SidebarComponent as Sidebar, SidebarContent, SelectMessage } from './index';
 import eventsInitalState from '../../redux/state/fakeEvents';
 
 test('Sidebar renders without crashing', () => {

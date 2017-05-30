@@ -6,7 +6,7 @@ import EventsLane from './EventsLane';
 import './EventsLane.css';
 
 
-const EventsLanes = ({
+export const EventsLanesComponent = ({
 	events,
 	categories,
 }) => {
@@ -40,7 +40,7 @@ const EventsLanes = ({
 	);
 };
 
-EventsLanes.propTypes = {
+EventsLanesComponent.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
@@ -62,6 +62,5 @@ EventsLanes.propTypes = {
 	).isRequired,
 };
 
-export const EventsLanesModule = EventsLanes;
 const mapStateToProps = ({ events, categories }) => ({ events, categories });
-export default connect(mapStateToProps)(EventsLanes);
+export default connect(mapStateToProps)(EventsLanesComponent);

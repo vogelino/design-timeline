@@ -33,18 +33,18 @@ export const SelectMessage = () => (
 	</div>
 );
 
-export const Sidebar = ({ selectedEvent }) => (
+export const SidebarComponent = ({ selectedEvent }) => (
 	<div className="sidebar">
 		{!selectedEvent ?
 			<SelectMessage /> : <SidebarContent {...selectedEvent} />}
 	</div>
 );
 
-Sidebar.defaultProps = {
+SidebarComponent.defaultProps = {
 	selectedEvent: null,
 };
 
-Sidebar.propTypes = {
+SidebarComponent.propTypes = {
 	selectedEvent: PropTypes.oneOfType([
 		PropTypes.oneOf([null]),
 		PropTypes.shape({
@@ -61,4 +61,4 @@ const mapStateToProps = ({ events }) => ({
 	selectedEvent: events.find(({ state }) => state.selected),
 });
 
-export default connect(mapStateToProps)(Sidebar);
+export default connect(mapStateToProps)(SidebarComponent);
