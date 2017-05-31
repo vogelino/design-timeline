@@ -14,6 +14,7 @@ export const ZoomControlComponent = ({
 			Zoom level
 		</label>
 		<input
+			className="zoomControl_input"
 			type="range"
 			min="20"
 			max="200"
@@ -22,7 +23,9 @@ export const ZoomControlComponent = ({
 			onChange={({ target: { value } }) =>
 				actions.setZoomLevel(Number(value))}
 		/>
-		<output>{zoomLevel} %</output>
+		<output className="zoomControl_output">
+			{zoomLevel} %
+		</output>
 	</form>
 );
 
