@@ -24,8 +24,8 @@
 
 .events-lane_item {
 	float: left;
-	width: 32px;
-	height: 32px;
+	width: 16px;
+	height: 16px;
 	border-radius: 50%;
 	text-align: left;
 	border: 1px solid;
@@ -47,4 +47,9 @@
 
 .events-lane_item--selected h4 {
 	color: white;
+}
+
+.events-lane_item--key-event {
+	width: 32px;
+	height: 32px;
 }
