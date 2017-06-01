@@ -24,7 +24,17 @@ const EventsLaneItem = ({
 		}}
 		title={title}
 		{...rest}
-	/>
+	>
+		<span
+			className={combineCssClasses({
+				'events-lane_item_tooltip': true,
+				'events-lane_item_tooltip--visible': hovered || selected,
+			})}
+			style={{ backgroundColor: color }}
+		>
+			{title}
+		</span>
+	</button>
 );
 
 EventsLaneItem.propTypes = {

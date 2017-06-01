@@ -34,7 +34,9 @@
 	position: absolute;
 	top: 50%;
 	left: 0;
-	transform: translate(-50%, -50%)
+	transform: translate(-50%, -50%);
+	outline: none;
+	transition: background 200ms ease-out;
 }
 
 .events-lane_item--hovered {
@@ -52,4 +54,23 @@
 .events-lane_item--key-event {
 	width: 32px;
 	height: 32px;
+}
+
+.events-lane_item_tooltip {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translate(-50%, 5px);
+	white-space: nowrap;
+	padding: 10px 15px;
+	border-radius: 3px;
+	color: white;
+	opacity: 0;
+	transition: transform 300ms ease-out, opacity 200ms ease-in;
+	pointer-events: none;
+}
+
+.events-lane_item_tooltip--visible {
+	opacity: 1;
+	transform: translate(-50%, -5px);
 }
