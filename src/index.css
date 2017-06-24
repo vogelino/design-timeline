@@ -3,6 +3,7 @@ body {
 	margin: 0;
 	font-family: 'Replica', sans-serif;
 	color: #003C6C;
+	-webkit-font-smoothing: antialiased;
 }
 
 a {

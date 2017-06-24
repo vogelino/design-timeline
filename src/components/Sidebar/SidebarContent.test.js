@@ -11,6 +11,8 @@ it('should render without crashing', () => {
 			text: 'lorem ipsum',
 			startDate: new Date(),
 			externalLinks: [],
+			category: 'bla',
+			type: 'tweet',
 		},
 	};
 	shallow(<SidebarContent {...props} />);

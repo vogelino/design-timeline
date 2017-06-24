@@ -11,5 +11,15 @@
 .sidebar_content {
 	width: 100%;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 0;
+}
+
+.sidebar_category {
+	padding: 0 20px;
+	height: 40px;
+	line-height: 40px;
+	color: white;
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: .02em;
 }
