@@ -23,7 +23,7 @@ const SidebarContent = ({
 		<SidebarCategory category={category} type={type} />
 		{titleImage ? <SidebarImage url={titleImage} credits={mediaCredits} /> : null}
 		<h1 className="sidebar_title">{title}</h1>
-		<h2 className="sidebar_date">{moment(startDate).calendar()}</h2>
+		<h2 className="sidebar_date">{moment(startDate).format('LL')}</h2>
 		<p className="sidebar_description">{text}</p>
 		{externalLinks.length ? <SidebarLinksList {...{ externalLinks }} /> : null}
 	</div>
