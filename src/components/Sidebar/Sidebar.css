@@ -23,3 +23,30 @@
 	font-size: 16px;
 	letter-spacing: .02em;
 }
+
+.sidebar_image {
+	margin: 0;
+	height: 160px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #EFF7FF;
+	position: relative;
+}
+
+.sidebar_credits {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	box-sizing: border-box;
+	padding: 20px;
+	color: white;
+	opacity: .7;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar_credits::before {
+	content: '© ';
+	opacity: .5;
+}

@@ -4,13 +4,24 @@ import moment from 'moment';
 import 'moment/locale/de';
 import SidebarLinksList from './SidebarLinksList';
 import SidebarCategory from './SidebarCategory';
+import SidebarImage from './SidebarImage';
 
 const SidebarContent = ({
 	id,
-	data: { title, text, startDate, externalLinks, category, type },
+	data: {
+		title,
+		text,
+		startDate,
+		externalLinks,
+		category,
+		type,
+		titleImage,
+		mediaCredits,
+	},
 }) => (
 	<div className="sidebar_content" id={`sidebar_content-${id}`}>
 		<SidebarCategory category={category} type={type} />
+		{titleImage ? <SidebarImage url={titleImage} credits={mediaCredits} /> : null}
 		<h1 className="sidebar_title">{title}</h1>
 		<h2 className="sidebar_date">{moment(startDate).calendar()}</h2>
 		<p className="sidebar_description">{text}</p>
@@ -27,6 +38,8 @@ SidebarContent.propTypes = {
 		externalLinks: PropTypes.arrayOf(PropTypes.string).isRequired,
 		category: PropTypes.string.isRequired,
 		type: PropTypes.string.isRequired,
+		titleImage: PropTypes.string,
+		mediaCredits: PropTypes.string,
 	}).isRequired,
 };
 

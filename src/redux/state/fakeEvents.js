@@ -56,6 +56,7 @@ const createFaxeEvent = () => ({
 		titleImage: casual.coin_flip ? createTitleImage() : undefined,
 		video: createVideo(),
 		externalLinks: casual.array_of_words(casual.integer(0, 2)).map(() => casual.url),
+		mediaCredits: casual.coin_flip ? casual.title : undefined,
 	},
 	state: {
 		selected: false,
