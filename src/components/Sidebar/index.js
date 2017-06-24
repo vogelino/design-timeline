@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { combineCssClasses } from '../../helpers/styleHelper';
+import moment from 'moment';
+import 'moment/locale/de';
 import './Sidebar.css';
 
 export const SidebarContent = ({
@@ -14,7 +15,7 @@ export const SidebarContent = ({
 }) => (
 	<div className="sidebar_content" id={`sidebar_content-${id}`}>
 		<h1>{title}</h1>
-		<h2>{startDate.toString()}</h2>
+		<h2>{moment(startDate).calendar()}</h2>
 		<p>{text}</p>
 	</div>
 );
