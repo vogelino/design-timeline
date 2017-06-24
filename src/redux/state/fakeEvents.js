@@ -53,7 +53,7 @@ const createFaxeEvent = () => ({
 		]),
 		startDate: new Date(casual.date('YYYY-MM-DD')),
 		endDate: casual.coin_flip ? casual.date('YYYY-MM-DD') : null,
-		titleImage: createTitleImage(),
+		titleImage: casual.coin_flip ? createTitleImage() : undefined,
 		video: createVideo(),
 		externalLinks: casual.array_of_words(casual.integer(0, 2)).map(() => casual.url),
 	},
