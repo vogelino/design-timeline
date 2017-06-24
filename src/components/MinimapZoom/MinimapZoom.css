@@ -1,0 +1,10 @@
+.minimapZoom {
+	position: absolute;
+	width: 100%;
+	height: 47px;
+	bottom: 0;
+	left: 0;
+	box-sizing: border-box;
+	padding-left: 280px;
+	z-index: 1;
+}

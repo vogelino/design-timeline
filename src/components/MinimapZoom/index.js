@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as zoomActions from '../../redux/actions/zoomActions';
+import './MinimapZoom.css';
 
 export const MinimapZoomComponent = () => (
 	<div className="minimapZoom">

@@ -1,3 +1,14 @@
 .sidebar {
-	flex: 0 0 320px;
+	position: absolute;
+	width: 280px;
+	top: 60px;
+	left: 0;
+	height: calc(100% - 60px);
+	z-index: 2;
+}
+
+.sidebar_content {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 20px;
 }

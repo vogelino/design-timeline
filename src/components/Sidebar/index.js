@@ -12,10 +12,10 @@ export const SidebarContent = ({
 		startDate,
 	},
 }) => (
-	<div className="siderbar_content" id={`sidebar_content-${id}`}>
+	<div className="sidebar_content" id={`sidebar_content-${id}`}>
 		<h1>{title}</h1>
-		<h2>{text}</h2>
 		<h2>{startDate.toString()}</h2>
+		<p>{text}</p>
 	</div>
 );
 
