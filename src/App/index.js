@@ -3,6 +3,7 @@ import EventsLanes from '../components/EventsLane';
 import Sidebar from '../components/Sidebar';
 import MinimapZoom from '../components/MinimapZoom';
 import Header from '../components/Header';
+import TopicsList from '../components/TopicsList';
 import './App.css';
 
 const App = () => (
@@ -11,6 +12,7 @@ const App = () => (
 		<Sidebar />
 		<MinimapZoom />
 		<EventsLanes />
+		<TopicsList />
 	</div>
 );
 

@@ -1,0 +1,19 @@
+.topicsList {
+	width: 120px;
+	height: calc(100% - 60px - 47px);
+	position: absolute;
+	top: 60px;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+.topicsList_item {
+	flex: 1 0 48px;
+	list-style: none;
+	box-sizing: border-box;
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+}
