@@ -5,6 +5,7 @@ import configureStore from './redux/store/configureStore';
 import fakeEvents from './redux/state/fakeEvents';
 
 import App from './App';
+import './fonts.css';
 import './index.css';
 
 const store = configureStore({ events: fakeEvents });
