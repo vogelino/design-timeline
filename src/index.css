@@ -1,5 +1,15 @@
 body {
-	margin: 0;
 	padding: 0;
+	margin: 0;
 	font-family: 'Replica', sans-serif;
+	color: #003C6C;
+}
+
+a {
+	color: #0087F2;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
