@@ -4,7 +4,7 @@ import { combineCssClasses } from '../../helpers/styleHelper';
 
 const EventsLaneItem = ({
 	id,
-	data: { title, startDate, keyEvent },
+	data: { title, startDate },
 	state: { selected, hovered },
 	scaleFunc,
 	color,
@@ -15,7 +15,6 @@ const EventsLaneItem = ({
 			'events-lane_item': true,
 			'events-lane_item--hovered': hovered,
 			'events-lane_item--selected': selected,
-			'events-lane_item--key-event': keyEvent,
 		})}
 		id={id}
 		style={{
@@ -42,7 +41,6 @@ EventsLaneItem.propTypes = {
 	data: PropTypes.shape({
 		title: PropTypes.string.isRequired,
 		startDate: PropTypes.instanceOf(Date).isRequired,
-		keyEvent: PropTypes.bool.isRequired,
 	}).isRequired,
 	state: PropTypes.shape({
 		selected: PropTypes.bool.isRequired,

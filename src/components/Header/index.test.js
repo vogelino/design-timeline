@@ -9,17 +9,17 @@ it('should render without crashing', () => {
 
 it('should contain the title', () => {
 	const header = shallow(<Header />);
-	expect(header.find('.Header_title').length).toBe(1);
+	expect(header.find('.header_title').length).toBe(1);
 });
 
 it('should contain the info link', () => {
 	const header = shallow(<Header />);
-	expect(header.find('.Header_infolink').length).toBe(1);
+	expect(header.find('.header_infolink').length).toBe(1);
 });
 
 it('should contain the legend, legend items and symbols', () => {
 	const header = shallow(<Header />);
-	expect(header.find('.Header_legend').length).toBe(1);
-	expect(header.find('.Header_legenditem').length).toBe(3);
-	expect(header.find('.Header_legenditemsymbol').length).toBe(3);
+	expect(header.find('.header_legend').length).toBe(1);
+	expect(header.find('.header_legenditem').length).toBe(3);
+	expect(header.find('.header_legenditemsymbol').length).toBe(3);
 });

@@ -1,19 +1,8 @@
 import uuid from 'uuid/v4';
 import casual from 'casual-cjs';
 
-const createTitleImage = () => ({
-	url: `http://placekitten.com/${casual.integer(300, 1500)}/${casual.integer(300, 1500)}`,
-	title: casual.title,
-	author: casual.full_name,
-	license: casual.random_element([
-		'https://opensource.org/licenses/MIT',
-		'https://opensource.org/licenses/MirOS',
-		'https://creativecommons.org/licenses/by/2.0/',
-		'https://creativecommons.org/licenses/by/4.0/',
-		'https://opensource.org/licenses/CNRI-Python',
-		'https://opensource.org/licenses/RSCPL',
-	]),
-});
+const createTitleImage = () =>
+	`http://placekitten.com/${casual.integer(300, 1500)}/${casual.integer(300, 1500)}`;
 
 const createVideo = () => ({
 	url: casual.random_element([
@@ -38,6 +27,7 @@ const createFaxeEvent = () => ({
 	id: uuid(),
 	data: {
 		title: casual.title,
+		author: casual.full_name,
 		text: casual.text,
 		category: casual.random_element([
 			'design-thinking',
@@ -52,7 +42,7 @@ const createFaxeEvent = () => ({
 			'portfolio-businessmodel-job-offers',
 			'interface-interaction-service-social-sustainable-business-strategy-design',
 		]),
-		types: casual.random_element([
+		type: casual.random_element([
 			'event',
 			'text',
 			'video',
@@ -62,11 +52,10 @@ const createFaxeEvent = () => ({
 			'audio',
 		]),
 		startDate: new Date(casual.date('YYYY-MM-DD')),
-		endDate: null,
+		endDate: casual.coin_flip ? casual.date('YYYY-MM-DD') : null,
 		titleImage: createTitleImage(),
 		video: createVideo(),
-		externalLinks: casual.array_of_words(casual.integer(0, 5)).map(() => casual.url),
-		keyEvent: casual.coin_flip,
+		externalLinks: casual.array_of_words(casual.integer(0, 2)).map(() => casual.url),
 	},
 	state: {
 		selected: false,
@@ -75,7 +64,7 @@ const createFaxeEvent = () => ({
 });
 
 const eventsInitalState = casual.array_of_words(
-	casual.integer(60, 120),
+	casual.integer(200, 300),
 ).map(createFaxeEvent);
 
 export default eventsInitalState;

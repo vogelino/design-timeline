@@ -51,11 +51,6 @@
 	color: white;
 }
 
-.events-lane_item--key-event {
-	width: 32px;
-	height: 32px;
-}
-
 .events-lane_item_tooltip {
 	position: absolute;
 	bottom: 100%;

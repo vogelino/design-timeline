@@ -3,9 +3,9 @@ import fakeEvents from './fakeEvents';
 
 test('calling fakeEvents should generate an array containing btw. 60 and 120 objects', () => {
 	expect(fakeEvents.length)
-		.toBeGreaterThanOrEqual(60);
+		.toBeGreaterThanOrEqual(200);
 	expect(fakeEvents.length)
-		.toBeLessThanOrEqual(120);
+		.toBeLessThanOrEqual(300);
 });
 
 test('events generated with fakeEvents should include 3 major keys: id, data & state', () => {

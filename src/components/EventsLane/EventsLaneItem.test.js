@@ -1,4 +1,4 @@
-/* global it, expect */
+/* global it */
 import React from 'react';
 import { shallow } from 'enzyme';
 import EventsLaneItem from './EventsLaneItem';
@@ -21,18 +21,4 @@ const createTestComponent = ({
 
 it('renders without crashing', () => {
 	shallow(createTestComponent());
-});
-
-it('adds the events-lane_item--key-event class if event has a truthy keyEvent prop', () => {
-	const keyEvent = true;
-	const data = Object.assign({}, defaultComponentProps.data, { keyEvent });
-	const wrapper = shallow(createTestComponent({ data }));
-	expect(wrapper.hasClass('events-lane_item--key-event')).toBe(keyEvent);
-});
-
-it('should not add the events-lane_item--key-event class if event has a falsy keyEvent prop', () => {
-	const keyEvent = false;
-	const data = Object.assign({}, defaultComponentProps.data, { keyEvent });
-	const wrapper = shallow(createTestComponent({ data }));
-	expect(wrapper.hasClass('events-lane_item--key-event')).toBe(keyEvent);
 });
