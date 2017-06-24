@@ -8,11 +8,11 @@ import './App.css';
 
 const App = () => (
 	<div className="appContainer">
-		<Header />
-		<Sidebar />
-		<MinimapZoom />
 		<EventsLanes />
+		<MinimapZoom />
+		<Sidebar />
 		<TopicsList />
+		<Header />
 	</div>
 );
 
