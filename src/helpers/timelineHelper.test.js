@@ -64,23 +64,23 @@ describe('getTimelineZoomOptions', () => {
 
 	describe('scale function', () => {
 		it('is a function', () => {
-			const { scaleFunction } = getTimelineZoomOptions(getParametersObject());
-			expect(typeof scaleFunction).toBe('function');
+			const { scaleFunc } = getTimelineZoomOptions(getParametersObject());
+			expect(typeof scaleFunc).toBe('function');
 		});
 
 		it('return the right translated values when called', () => {
 			const minDate = new Date('01.01.2000');
 			const maxDate = new Date('01.20.2000');
-			const { scaleFunction } = getTimelineZoomOptions({
+			const { scaleFunc } = getTimelineZoomOptions({
 				zoomStart: 20,
 				zoomEnd: 80,
 				width: 600,
 				minDate,
 				maxDate,
 			});
-			expect(scaleFunction(minDate)).toBe(0);
-			expect(scaleFunction(new Date('01.10.2000'))).toBe(473.6842105263158);
-			expect(scaleFunction(maxDate)).toBe(1000);
+			expect(scaleFunc(minDate)).toBe(0);
+			expect(scaleFunc(new Date('01.10.2000'))).toBe(473.6842105263158);
+			expect(scaleFunc(maxDate)).toBe(1000);
 		});
 	});
 });
