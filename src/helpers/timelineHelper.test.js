@@ -62,8 +62,25 @@ describe('getTimelineZoomOptions', () => {
 		expect(offset).toEqual(expectedOffset);
 	});
 
-	it('returns a scale function', () => {
-		const { scaleFunction } = getTimelineZoomOptions(getParametersObject());
-		expect(typeof scaleFunction).toBe('function');
+	describe('scale function', () => {
+		it('is a function', () => {
+			const { scaleFunction } = getTimelineZoomOptions(getParametersObject());
+			expect(typeof scaleFunction).toBe('function');
+		});
+
+		it('return the right translated values when called', () => {
+			const minDate = new Date('01.01.2000');
+			const maxDate = new Date('01.20.2000');
+			const { scaleFunction } = getTimelineZoomOptions({
+				zoomStart: 20,
+				zoomEnd: 80,
+				width: 600,
+				minDate,
+				maxDate,
+			});
+			expect(scaleFunction(minDate)).toBe(0);
+			expect(scaleFunction(new Date('01.10.2000'))).toBe(473.6842105263158);
+			expect(scaleFunction(maxDate)).toBe(1000);
+		});
 	});
 });
