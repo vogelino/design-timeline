@@ -1,38 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import moment from 'moment';
-import 'moment/locale/de';
 import './Sidebar.css';
-
-export const SidebarContent = ({
-	id,
-	data: {
-		title,
-		text,
-		startDate,
-	},
-}) => (
-	<div className="sidebar_content" id={`sidebar_content-${id}`}>
-		<h1>{title}</h1>
-		<h2>{moment(startDate).calendar()}</h2>
-		<p>{text}</p>
-	</div>
-);
-
-SidebarContent.propTypes = {
-	id: PropTypes.string.isRequired,
-	data: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		text: PropTypes.string.isRequired,
-	}).isRequired,
-};
-
-export const SelectMessage = () => (
-	<div className="sidebar_selectMessage">
-		Please select an item to view its content
-	</div>
-);
+import SelectMessage from './SelectMessage';
+import SidebarContent from './SidebarContent';
 
 export const SidebarComponent = ({ selectedEvent }) => (
 	<div className="sidebar">
