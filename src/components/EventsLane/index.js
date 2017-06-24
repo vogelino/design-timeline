@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { scaleTime } from 'd3-scale';
+import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
 import EventsLane from './EventsLane';
 import './EventsLane.css';
-
-const ZOOM_BASE_PX = 4000;
 
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	zoom: { level: zoomPercentageLevel },
+	zoom: { start: zoomStart, end: zoomEnd },
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
-	const maxValue = ZOOM_BASE_PX * (zoomPercentageLevel / 100);
-	const scaleFunc = scaleTime().domain([
-		eventsByDate[0].data.startDate,
-		eventsByDate[events.length - 1].data.startDate,
-	]).range([0, maxValue]);
+	const { scaleFunc, totalWidth } = getTimelineZoomOptions({
+		width: document.documentElement.clientWidth,
+		zoomStart,
+		zoomEnd,
+		minDate: eventsByDate[0].data.startDate,
+		maxDate: eventsByDate[events.length - 1].data.startDate,
+	});
 
 	const lanes = categories.map((category) => ({
 		laneTitle: category.title,
@@ -37,7 +37,7 @@ export const EventsLanesComponent = ({
 					events={laneEvents}
 					scaleFunc={scaleFunc}
 					color={laneColor}
-					width={maxValue}
+					width={totalWidth}
 				/>
 			))}
 		</div>
@@ -65,7 +65,8 @@ EventsLanesComponent.propTypes = {
 		}),
 	).isRequired,
 	zoom: PropTypes.shape({
-		level: PropTypes.number.isRequired,
+		start: PropTypes.number.isRequired,
+		end: PropTypes.number.isRequired,
 	}),
 };
 
