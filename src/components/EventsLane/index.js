@@ -67,7 +67,7 @@ EventsLanesComponent.propTypes = {
 	zoom: PropTypes.shape({
 		start: PropTypes.number.isRequired,
 		end: PropTypes.number.isRequired,
-	}),
+	}).isRequired
 };
 
 const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });
