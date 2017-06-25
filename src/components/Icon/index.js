@@ -45,7 +45,7 @@ Icon.propTypes = {
 		'text',
 		'video',
 		'web',
-	]),
+	]).isRequired,
 };
 
 export default Icon;

@@ -11,7 +11,7 @@
 
 .events-lane {
 	flex: 1 0 48px;
-	padding: 0 200px;
+	padding: 0 100px;
 	background: #EFF7FF;
 	position: relative;
 }
@@ -55,17 +55,47 @@
 	position: absolute;
 	bottom: 100%;
 	left: 50%;
-	transform: translate(-50%, 5px);
+	transform-origin: 12px 36px;
+	transform: translate(-12px, 5px) rotate(4deg);
 	white-space: nowrap;
-	padding: 10px 15px;
+	padding: 0 51px 0 15px;
+	height: 36px;
 	border-radius: 3px;
 	color: white;
 	opacity: 0;
-	transition: transform 300ms ease-out, opacity 200ms ease-in;
+	transition: transform 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 200ms ease-out;
 	pointer-events: none;
+	line-height: 36px;
+	z-index: 10;
 }
 
 .events-lane_item_tooltip--visible {
 	opacity: 1;
-	transform: translate(-50%, -5px);
+	transform: translate(-12px, -8px) rotate(0);
+}
+
+.events-lane_item_tooltipicon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 8px 9px;
+	width: 36px;
+	height: 36px;
+	box-sizing: border-box;
+	border-radius: 0 3px 3px 0;
+}
+
+.events-lane_item_tooltipicon .icon {
+	float: left;
+}
+
+.events-lane_item_tooltiparrow {
+	width: 8px;
+	height: 8px;
+	border-radius: 1px;
+	transform: translate(-4px, -5px) rotate(45deg);
+	position: absolute;
+	top: 100%;
+	left: 12px;
 }

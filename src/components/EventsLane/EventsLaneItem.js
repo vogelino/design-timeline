@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { combineCssClasses } from '../../helpers/styleHelper';
+import EventsLaneTooltip from './EventsLaneTooltip';
 
 const EventsLaneItem = ({
 	id,
-	data: { title, startDate },
+	data: { title, startDate, type },
 	state: { selected, hovered },
 	scaleFunc,
 	color,
@@ -17,22 +18,16 @@ const EventsLaneItem = ({
 			'events-lane_item--selected': selected,
 		})}
 		id={id}
-		style={{
-			left: scaleFunc(startDate) + 200,
-			color,
-		}}
+		style={{ left: scaleFunc(startDate) + 100, color }}
 		title={title}
 		{...rest}
 	>
-		<span
-			className={combineCssClasses({
-				'events-lane_item_tooltip': true,
-				'events-lane_item_tooltip--visible': hovered || selected,
-			})}
-			style={{ backgroundColor: color }}
-		>
-			{title}
-		</span>
+		<EventsLaneTooltip
+			content={title}
+			iconId={type}
+			show={hovered || selected}
+			color={color}
+		/>
 	</button>
 );
 
@@ -40,6 +35,7 @@ EventsLaneItem.propTypes = {
 	id: PropTypes.string.isRequired,
 	data: PropTypes.shape({
 		title: PropTypes.string.isRequired,
+		type: PropTypes.string.isRequired,
 		startDate: PropTypes.instanceOf(Date).isRequired,
 	}).isRequired,
 	state: PropTypes.shape({
