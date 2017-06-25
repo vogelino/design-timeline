@@ -29,7 +29,7 @@ export const TimeDotsContainerComponent = ({
 		key: 'mousePointer',
 		color: '#0087F2',
 		position: mouseX,
-		tooltipContent: 'jetzt',
+		tooltipContent: moment(scaleFunc.invert(mouseX - 100)).format('LL'),
 		show: true,
 	}];
 

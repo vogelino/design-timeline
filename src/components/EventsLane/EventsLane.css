@@ -53,6 +53,10 @@
 	transform: translate(-50%, -50%);
 }
 
+.events-lane_item--selected {
+	z-index: 100;
+}
+
 .events-lane_itemsymbol {
 	border-radius: 50%;
 	text-align: left;
@@ -75,7 +79,6 @@
 	background: currentColor;
 	box-shadow: 0 0 0 2px #0087F2;
 	border-color: #EFF7FF;
-	z-index: 100;
 }
 
 .events-lane_itemsymbol--extreme,
