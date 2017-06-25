@@ -25,7 +25,7 @@ const EventsLaneItem = ({
 		<EventsLaneTooltip
 			content={title}
 			iconId={type}
-			show={hovered || selected}
+			show={hovered}
 			color={color}
 		/>
 	</button>
