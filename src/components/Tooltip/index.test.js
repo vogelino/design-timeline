@@ -1,10 +1,10 @@
 /* global it */
 import React from 'react';
 import { shallow } from 'enzyme';
-import EventsLaneTooltip from './EventsLaneTooltip';
+import Tooltip from './index';
 
 it('should render without crashing', () => {
-	shallow(<EventsLaneTooltip
+	shallow(<Tooltip
 		iconId="audio"
 		content="bla"
 		color="#BADA55"

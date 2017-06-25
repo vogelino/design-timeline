@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import MinimapZoom from '../components/MinimapZoom';
 import Header from '../components/Header';
 import TopicsList from '../components/TopicsList';
+import TimeDots from '../components/TimeDots';
 import './App.css';
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
 		<Sidebar />
 		<TopicsList />
 		<Header />
+		<TimeDots />
 	</div>
 );
 

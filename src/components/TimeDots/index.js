@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import 'moment/locale/de';
 import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
-import EventsLane from './EventsLane';
-import SelectionMarker from './SelectionMarker';
-import './EventsLane.css';
+import TimeDots from './TimeDots';
+import './TimeDots.css';
 
-export const EventsLanesComponent = ({
+export const TimeDotsContainerComponent = ({
 	events,
 	categories,
 	zoom: { start: zoomStart, end: zoomEnd },
@@ -14,52 +15,36 @@ export const EventsLanesComponent = ({
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
-	const { scaleFunc, totalWidth } = getTimelineZoomOptions({
+	const { scaleFunc } = getTimelineZoomOptions({
 		width: document.documentElement.clientWidth,
 		zoomStart,
 		zoomEnd,
 		minDate: eventsByDate[0].data.startDate,
 		maxDate: eventsByDate[events.length - 1].data.startDate,
 	});
-
-	const lanes = categories.map((category) => ({
-		laneTitle: category.title,
-		laneSlug: category.slug,
-		laneColor: category.color,
-		laneEvents: events.filter(({ data: { category: eventCategory } }) =>
-			category.slug === eventCategory),
-	}));
 	const selectedEvent = events.find(({ state: { selected } }) => selected);
-	const selectedEventColor = selectedEvent ? categories.find(({ slug }) =>
+
+	if (!selectedEvent) {
+		return null;
+	}
+
+	const selectedEventColor = categories.find(({ slug }) =>
 		slug === selectedEvent.data.category
-	).color : 'transparent';
+	).color;
 	return (
-		<div className="events-lanes">
-			<div className="events-lanes_lanes">
-				{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
-					<EventsLane
-						key={laneSlug}
-						className={laneSlug}
-						events={laneEvents}
-						scaleFunc={scaleFunc}
-						color={laneColor}
-						width={totalWidth}
-					/>
-				))}
-			</div>
-			{
-				selectedEvent ?
-					<SelectionMarker
-						date={selectedEvent.data.startDate}
-						color={selectedEventColor}
-						scaleFunc={scaleFunc}
-					/> : null
-			}
-		</div>
+		<TimeDots
+			dots={[{
+				key: selectedEvent.id,
+				color: selectedEventColor,
+				position: scaleFunc(selectedEvent.data.startDate) + 380,
+				tooltipIcon: selectedEvent.data.type,
+				tooltipContent: moment(selectedEvent.data.startDate).format('LL'),
+			}]}
+		/>
 	);
 };
 
-EventsLanesComponent.propTypes = {
+TimeDotsContainerComponent.propTypes = {
 	events: PropTypes.arrayOf(
 		PropTypes.shape({
 			id: PropTypes.string.isRequired,
@@ -85,5 +70,6 @@ EventsLanesComponent.propTypes = {
 	}).isRequired,
 };
 
-const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });
-export default connect(mapStateToProps)(EventsLanesComponent);
+const mapStateToProps = ({ events, categories, zoom }) =>
+	({ events, categories, zoom });
+export default connect(mapStateToProps)(TimeDotsContainerComponent);

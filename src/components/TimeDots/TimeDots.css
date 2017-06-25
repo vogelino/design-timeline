@@ -1,0 +1,23 @@
+.timeDots {
+	position: absolute;
+	top: -4px;
+	left: 0;
+	width: 100%;
+	height: 8px;
+	z-index: 1000;
+	top: 56.5px;
+	box-sizing: border-box;
+	padding-left: 280px;
+	padding-right: 120px;
+}
+
+.timeDots_dot {
+	top: 0;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	border: 1px solid;
+	position: absolute;
+	transform: translate(-4px, -1px);
+	background-color: #EFF7FF;
+}

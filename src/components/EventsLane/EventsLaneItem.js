@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { combineCssClasses } from '../../helpers/styleHelper';
-import EventsLaneTooltip from './EventsLaneTooltip';
+import Tooltip from '../Tooltip';
 
 const EventsLaneItem = ({
 	id,
@@ -22,7 +22,7 @@ const EventsLaneItem = ({
 		title={title}
 		{...rest}
 	>
-		<EventsLaneTooltip
+		<Tooltip
 			content={title}
 			iconId={type}
 			show={hovered}
