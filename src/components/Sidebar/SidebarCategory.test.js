@@ -11,7 +11,7 @@ test('Sidebar renders without crashing', () => {
 				slug: 'design-thinking',
 				color: '#BADA55',
 			}}
-			type="tweet"
+			type="audio"
 		/>
 	);
 });

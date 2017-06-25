@@ -12,7 +12,9 @@ export const SidebarCategoryComponent = ({
 		style={{ backgroundColor }}
 	>
 		{title}
-		<Icon iconId={type} />
+		<span className="sidebar_categoryicon">
+			<Icon iconId={type} />
+		</span>
 	</header>
 );
 
