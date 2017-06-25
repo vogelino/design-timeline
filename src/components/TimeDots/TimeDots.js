@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from '../Tooltip';
 
-const SelectionMarker = ({ dots }) => (
-	<div className="timeDots">
-		{dots.map(({
-			key,
-			position: left,
-			color,
-			tooltipContent,
-		}) => (
-			<span
-				key={key}
-				className="timeDots_dot"
-				style={{ left, color }}
-			>
-				<Tooltip content={tooltipContent} color={color} show />
-			</span>
-		))}
-	</div>
-);
+class SelectionMarker extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { hoveredDot: false };
+	}
+	onMouseEnter(key) {
+		this.setState({ hoveredDot: key });
+	}
+	onMouseLeave() {
+		this.setState({ hoveredDot: false });
+	}
+	render() {
+		const { dots } = this.props;
+		return (
+			<div className="timeDots">
+				{dots.map(({
+					key,
+					position: left,
+					color,
+					tooltipContent,
+				}) => (
+					<span
+						key={key}
+						className="timeDots_dot"
+						style={{ left, color }}
+						onMouseEnter={() => this.onMouseEnter(key)}
+						onMouseLeave={() => this.onMouseLeave()}
+					>
+						<Tooltip
+							content={tooltipContent}
+							color={color}
+							show={this.state.hoveredDot === key}
+						/>
+					</span>
+				))}
+			</div>
+		);
+	}
+}
 
 SelectionMarker.propTypes = {
 	dots: PropTypes.arrayOf(PropTypes.shape({

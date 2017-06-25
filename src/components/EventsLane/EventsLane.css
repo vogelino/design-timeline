@@ -45,16 +45,18 @@
 	position: absolute;
 	top: 50%;
 	left: 0;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%) scale(1);
 	outline: none;
 	box-shadow: 0 0 0 0 #0087F2;
 	transition: background 200ms ease-out,
 		border 200ms ease-out,
+		transform 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275),
 		box-shadow 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .events-lane_item--hovered {
 	background: currentColor;
+	transform: translate(-50%, -50%) scale(1.2);
 }
 
 .events-lane_item--selected {
