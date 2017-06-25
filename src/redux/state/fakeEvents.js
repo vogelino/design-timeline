@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4';
-import casual from 'casual-cjs';
+import { de_DE as casual } from 'casual-cjs';
 
 const createTitleImage = () =>
 	`http://placekitten.com/${casual.integer(300, 1500)}/${casual.integer(300, 1500)}`;
