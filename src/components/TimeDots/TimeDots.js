@@ -22,6 +22,7 @@ class SelectionMarker extends Component {
 					position: left,
 					color,
 					tooltipContent,
+					show,
 				}) => (
 					<span
 						key={key}
@@ -33,7 +34,7 @@ class SelectionMarker extends Component {
 						<Tooltip
 							content={tooltipContent}
 							color={color}
-							show={this.state.hoveredDot === key}
+							show={show || this.state.hoveredDot === key}
 						/>
 					</span>
 				))}
@@ -48,6 +49,7 @@ SelectionMarker.propTypes = {
 		position: PropTypes.number.isRequired,
 		color: PropTypes.string.isRequired,
 		tooltipContent: PropTypes.string.isRequired,
+		show: PropTypes.bool,
 	})).isRequired,
 };
 

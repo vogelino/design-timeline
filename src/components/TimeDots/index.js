@@ -11,6 +11,7 @@ export const TimeDotsContainerComponent = ({
 	events,
 	categories,
 	zoom: { start: zoomStart, end: zoomEnd },
+	mouseX,
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
@@ -24,24 +25,27 @@ export const TimeDotsContainerComponent = ({
 	});
 	const selectedEvent = events.find(({ state: { selected } }) => selected);
 
-	if (!selectedEvent) {
-		return null;
-	}
+	const dots = [{
+		key: 'mousePointer',
+		color: '#0087F2',
+		position: mouseX,
+		tooltipContent: 'jetzt',
+		show: true,
+	}];
 
-	const selectedEventColor = categories.find(({ slug }) =>
-		slug === selectedEvent.data.category
-	).color;
-	return (
-		<TimeDots
-			dots={[{
-				key: selectedEvent.id,
-				color: selectedEventColor,
-				position: scaleFunc(selectedEvent.data.startDate) + 380,
-				tooltipIcon: selectedEvent.data.type,
-				tooltipContent: moment(selectedEvent.data.startDate).format('LL'),
-			}]}
-		/>
-	);
+	if (selectedEvent) {
+		const selectedEventColor = categories.find(({ slug }) =>
+			slug === selectedEvent.data.category
+		).color;
+
+		dots.push({
+			key: selectedEvent.id,
+			color: selectedEventColor,
+			position: scaleFunc(selectedEvent.data.startDate) + 380,
+			tooltipContent: moment(selectedEvent.data.startDate).format('LL'),
+		});
+	}
+	return <TimeDots dots={dots} />;
 };
 
 TimeDotsContainerComponent.propTypes = {
@@ -68,8 +72,9 @@ TimeDotsContainerComponent.propTypes = {
 		start: PropTypes.number.isRequired,
 		end: PropTypes.number.isRequired,
 	}).isRequired,
+	mouseX: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = ({ events, categories, zoom }) =>
-	({ events, categories, zoom });
+const mapStateToProps = ({ events, categories, zoom, mouse: { mouseX } }) =>
+	({ events, categories, zoom, mouseX });
 export default connect(mapStateToProps)(TimeDotsContainerComponent);

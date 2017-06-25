@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import throttle from 'throttle-debounce/throttle';
 import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
+import * as mouseActions from '../../redux/actions/mouseActions';
 import EventsLane from './EventsLane';
 import SelectionMarker from './SelectionMarker';
 import './EventsLane.css';
@@ -10,6 +13,7 @@ export const EventsLanesComponent = ({
 	events,
 	categories,
 	zoom: { start: zoomStart, end: zoomEnd },
+	actions: { setMouseCoordinates },
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
@@ -33,8 +37,13 @@ export const EventsLanesComponent = ({
 	const selectedEventColor = selectedEvent ? categories.find(({ slug }) =>
 		slug === selectedEvent.data.category
 	).color : 'transparent';
+	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);
 	return (
-		<div className="events-lanes">
+		<div
+			className="events-lanes"
+			onMouseMove={({ clientX: mouseX, clientY: mouseY }) =>
+				throttleSetMouseCoordinates({ mouseX, mouseY })}
+		>
 			<div className="events-lanes_lanes">
 				{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
 					<EventsLane
@@ -83,7 +92,13 @@ EventsLanesComponent.propTypes = {
 		start: PropTypes.number.isRequired,
 		end: PropTypes.number.isRequired,
 	}).isRequired,
+	actions: PropTypes.shape({
+		setMouseCoordinates: PropTypes.func.isRequired,
+	}).isRequired,
 };
 
 const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });
-export default connect(mapStateToProps)(EventsLanesComponent);
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(mouseActions, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(EventsLanesComponent);
