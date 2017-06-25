@@ -20,7 +20,7 @@
 
 .tooltip--visible {
 	opacity: 1;
-	transform: translate(-12px, -8px) rotate(0);
+	transform: translate(-12px, -10px) rotate(0);
 }
 
 .tooltip--noIcon {

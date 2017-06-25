@@ -60,6 +60,7 @@ const createFaxeEvent = () => ({
 		video: createVideo(),
 		externalLinks: casual.array_of_words(casual.integer(0, 2)).map(() => casual.url),
 		mediaCredits: casual.coin_flip ? 'Wikipedia DE, CC-by-sa-3.0' : undefined,
+		future: casual.coin_flip ? casual.random_element(['trend', 'extreme', undefined]) : undefined,
 	},
 	state: {
 		selected: false,

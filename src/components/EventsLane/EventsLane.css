@@ -33,20 +33,32 @@
 	clear: both;
 }
 
-.events-lane_item {
+.events-lane_item,
+.events-lane_itemsymbol {
 	float: left;
-	width: 16px;
-	height: 16px;
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.events-lane_item {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	background: none;
+	border: none;
+	outline: none;
+	transform: translate(-50%, -50%);
+}
+
+.events-lane_itemsymbol {
 	border-radius: 50%;
 	text-align: left;
 	border: 1px solid;
 	cursor: pointer;
-	background: none;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translate(-50%, -50%) scale(1);
-	outline: none;
+	transform: scale(1) rotate(0);
 	box-shadow: 0 0 0 0 #0087F2;
 	transition: background 200ms ease-out,
 		border 200ms ease-out,
@@ -54,19 +66,32 @@
 		box-shadow 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.events-lane_item--hovered {
+.events-lane_itemsymbol--hovered {
 	background: currentColor;
-	transform: translate(-50%, -50%) scale(1.2);
+	transform: scale(1.2) rotate(0);
 }
 
-.events-lane_item--selected {
+.events-lane_itemsymbol--selected {
 	background: currentColor;
 	box-shadow: 0 0 0 2px #0087F2;
 	border-color: #EFF7FF;
 	z-index: 100;
 }
 
-.events-lane_item--selected h4 {
+.events-lane_itemsymbol--extreme,
+.events-lane_itemsymbol--trend {
+	border-radius: 3px;
+}
+
+.events-lane_itemsymbol--extreme {
+	transform: scale(1) rotate(-45deg);
+}
+
+.events-lane_itemsymbol--extreme.events-lane_itemsymbol--hovered {
+	transform: scale(1.2) rotate(-45deg);
+}
+
+.events-lane_itemsymbol--selected h4 {
 	color: white;
 }
 
