@@ -7,13 +7,14 @@
 	flex-direction: column;
 	overflow-x: scroll;
 	overflow-y: hidden;
+	background: #EFF7FF;
 }
 
 .events-lane {
 	flex: 1 0 48px;
 	padding: 0 100px;
-	background: #EFF7FF;
 	position: relative;
+	z-index: 1;
 }
 
 .events-lane:after {
@@ -104,4 +105,12 @@
 	position: absolute;
 	top: 100%;
 	left: 12px;
+}
+
+.selectionMarker {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1px;
+	height: 100%;
 }

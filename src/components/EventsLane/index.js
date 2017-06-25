@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
 import EventsLane from './EventsLane';
+import SelectionMarker from './SelectionMarker';
 import './EventsLane.css';
 
 export const EventsLanesComponent = ({
@@ -28,6 +29,7 @@ export const EventsLanesComponent = ({
 		laneEvents: events.filter(({ data: { category: eventCategory } }) =>
 			category.slug === eventCategory),
 	}));
+	const selectedEvent = events.find(({ state: { selected } }) => selected);
 	return (
 		<div className="events-lanes">
 			{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
@@ -40,6 +42,16 @@ export const EventsLanesComponent = ({
 					width={totalWidth}
 				/>
 			))}
+			{
+				selectedEvent ?
+					<SelectionMarker
+						date={selectedEvent.data.startDate}
+						color={categories.find(({ slug }) =>
+							slug === selectedEvent.data.category
+						).color}
+						scaleFunc={scaleFunc}
+					/> : null
+			}
 		</div>
 	);
 };
