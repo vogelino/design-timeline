@@ -34,8 +34,7 @@ MinimapZoomComponent.propTypes = {
 		}),
 	).isRequired,
 	actions: PropTypes.shape({
-		setZoomStart: PropTypes.func.isRequired,
-		setZoomEnd: PropTypes.func.isRequired,
+		setZoom: PropTypes.func.isRequired,
 	}).isRequired,
 };
 

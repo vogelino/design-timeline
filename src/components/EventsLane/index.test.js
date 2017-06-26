@@ -12,7 +12,7 @@ it('renders without crashing', () => {
 			categories={initialCategories}
 			zoom={{ start: 0, end: 100 }}
 			setZoomStart={() => {}}
-			actions={{ setMouseCoordinates: (x) => x }}
+			actions={{ setMouseCoordinates: (x) => x, setZoom: (x) => x }}
 			ui={{ timelineWidth: 0 }}
 		/>
 	);

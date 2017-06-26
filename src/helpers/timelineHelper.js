@@ -1,5 +1,7 @@
 import { scaleTime } from 'd3-scale';
 
+const HUNDRED_PERCENT = 100;
+
 const mandatory = (parameterName) => {
 	throw new Error(`Missing mandatory parmeter: "${parameterName}!!"`);
 };
@@ -17,7 +19,6 @@ export const getTimelineZoomOptions = ({
 	maxDate = mandatory('maxDate'),
 	width = mandatory('width'),
 } = mandatory('main object')) => {
-	const HUNDRED_PERCENT = 100;
 	const visiblePortionPercentage = zoomEnd - zoomStart;
 	const totalWidthMultiplier = HUNDRED_PERCENT / visiblePortionPercentage;
 	const totalWidth = width * totalWidthMultiplier;
@@ -26,4 +27,19 @@ export const getTimelineZoomOptions = ({
 		minDate, maxDate, totalWidth,
 	});
 	return { width, totalWidth, offset, scaleFunc };
+};
+
+export const getTimelineZoom = ({
+	currentZoomStart = mandatory('currentZoomStart'),
+	currentZoomEnd = mandatory('currentZoomEnd'),
+	offset = mandatory('offset'),
+	totalWidth = mandatory('totalWidth'),
+}) => {
+	const visiblePortionPercentage = currentZoomEnd - currentZoomStart;
+	const zoomStart = (offset / totalWidth) * HUNDRED_PERCENT;
+	const zoomEnd = zoomStart + visiblePortionPercentage;
+	return {
+		zoomStart,
+		zoomEnd,
+	};
 };

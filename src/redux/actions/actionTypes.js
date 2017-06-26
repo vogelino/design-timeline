@@ -1,6 +1,5 @@
 export const SELECT_EVENT = 'SELECT_EVENT';
 export const SET_HOVERED_STATUS = 'SET_HOVERED_STATUS';
-export const SET_ZOOM_START = 'SET_ZOOM_START';
-export const SET_ZOOM_END = 'SET_ZOOM_END';
+export const ZOOM_CHANGED = 'ZOOM_CHANGED';
 export const MOUSE_MOVED = 'MOUSE_MOVED';
 export const WINDOW_RESIZED = 'WIDNOW_RESIZED';

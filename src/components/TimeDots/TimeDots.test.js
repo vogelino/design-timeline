@@ -10,6 +10,7 @@ it('renders without crashing', () => {
 			color: '#BADA55',
 			key: 'wefwf',
 			tooltipContent: 'tooltip',
+			offset: 0,
 		}]}
 	/>);
 });

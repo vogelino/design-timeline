@@ -1,17 +1,10 @@
 /* global test, expect */
 import * as types from './actionTypes';
-import * as actions from './zoomActions';
+import { setZoom } from './zoomActions';
 
 test('setZoomStart should return an action with payload', () => {
-	expect(actions.setZoomStart(200)).toEqual({
-		type: types.SET_ZOOM_START,
+	expect(setZoom(200)).toEqual({
+		type: types.ZOOM_CHANGED,
 		payload: 200,
-	});
-});
-
-test('setZoomEnd should return an action with payload', () => {
-	expect(actions.setZoomEnd(400)).toEqual({
-		type: types.SET_ZOOM_END,
-		payload: 400,
 	});
 });

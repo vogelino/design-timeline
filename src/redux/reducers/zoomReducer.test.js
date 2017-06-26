@@ -11,16 +11,9 @@ it('should return the state when the action in not recognized', () => {
 	expect(zoomReducer('hello')).toBe('hello');
 });
 
-it('should return the new zoom start when called with SET_ZOOM_START', () => {
+it('should return the new zoom start when called with ZOOM_CHANGED', () => {
 	expect(zoomReducer(zoomInitialState, {
-		type: types.SET_ZOOM_START,
-		payload: 200,
+		type: types.ZOOM_CHANGED,
+		payload: { start: 200 },
 	}).start).toBe(200);
-});
-
-it('should return the new zoom end when called with SET_ZOOM_END', () => {
-	expect(zoomReducer(zoomInitialState, {
-		type: types.SET_ZOOM_END,
-		payload: 200,
-	}).end).toBe(200);
 });
