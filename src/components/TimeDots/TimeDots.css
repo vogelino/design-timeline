@@ -11,6 +11,12 @@
 	padding-right: 120px;
 }
 
+.timeDots_wrapper {
+	width: 100%;
+	height: 10px;
+	position: relative;
+}
+
 .timeDots_dot {
 	top: 0;
 	width: 7px;

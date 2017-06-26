@@ -7,6 +7,7 @@ import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
 import * as mouseActions from '../../redux/actions/mouseActions';
 import EventsLane from './EventsLane';
 import SelectionMarker from './SelectionMarker';
+import { SIDEBAR_WIDTH, HEADER_HEIGHT } from '../../redux/constants/uiConstants';
 import './EventsLane.css';
 
 export const EventsLanesComponent = ({
@@ -19,7 +20,7 @@ export const EventsLanesComponent = ({
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
-	const { scaleFunc, totalWidth } = getTimelineZoomOptions({
+	const { scaleFunc, totalWidth, offset } = getTimelineZoomOptions({
 		width: timelineWidth,
 		zoomStart,
 		zoomEnd,
@@ -42,29 +43,41 @@ export const EventsLanesComponent = ({
 	return (
 		<div
 			className="events-lanes"
-			onMouseMove={({ clientX: mouseX, clientY: mouseY }) =>
-				throttleSetMouseCoordinates({ mouseX, mouseY })}
-		>
-			<div className="events-lanes_lanes">
-				{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
-					<EventsLane
-						key={laneSlug}
-						className={laneSlug}
-						events={laneEvents}
-						scaleFunc={scaleFunc}
-						color={laneColor}
-						width={totalWidth}
-					/>
-				))}
-			</div>
-			{
-				selectedEvent ?
-					<SelectionMarker
-						date={selectedEvent.data.startDate}
-						color={selectedEventColor}
-						scaleFunc={scaleFunc}
-					/> : null
+			onMouseMove={({ clientX, clientY }) =>
+				throttleSetMouseCoordinates({
+					mouseX: clientX - SIDEBAR_WIDTH,
+					mouseY: clientY - HEADER_HEIGHT,
+				})
 			}
+		>
+			<div
+				className="events-lanes_wrapper"
+				style={{
+					transform: `translateX(-${offset}px)`,
+					width: totalWidth + 200,
+				}}
+			>
+				<div className="events-lanes_lanes">
+					{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
+						<EventsLane
+							key={laneSlug}
+							className={laneSlug}
+							events={laneEvents}
+							scaleFunc={scaleFunc}
+							color={laneColor}
+							width={totalWidth}
+						/>
+					))}
+				</div>
+				{
+					selectedEvent ?
+						<SelectionMarker
+							date={selectedEvent.data.startDate}
+							color={selectedEventColor}
+							scaleFunc={scaleFunc}
+						/> : null
+				}
+			</div>
 		</div>
 	);
 };

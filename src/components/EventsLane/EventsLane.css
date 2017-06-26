@@ -1,10 +1,12 @@
-.events-lanes {
+.events-lanes,
+.events-lanes_wrapper {
 	height: 100%;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	overflow: hidden;
+	background: #EFF7FF;
 }
 
 .events-lanes_lanes {
@@ -17,7 +19,6 @@
 	flex-direction: column;
 	overflow-x: hidden; /* Change later */
 	overflow-y: hidden;
-	background: #EFF7FF;
 }
 
 .events-lane {

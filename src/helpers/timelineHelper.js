@@ -20,8 +20,8 @@ export const getTimelineZoomOptions = ({
 	const HUNDRED_PERCENT = 100;
 	const visiblePortionPercentage = zoomEnd - zoomStart;
 	const totalWidthMultiplier = HUNDRED_PERCENT / visiblePortionPercentage;
-	const totalWidth = Math.floor(width * totalWidthMultiplier);
-	const offset = Math.floor((totalWidth * zoomStart) / HUNDRED_PERCENT);
+	const totalWidth = width * totalWidthMultiplier;
+	const offset = (totalWidth * zoomStart) / HUNDRED_PERCENT;
 	const scaleFunc = createScaleFunction({
 		minDate, maxDate, totalWidth,
 	});

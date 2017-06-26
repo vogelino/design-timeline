@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'moment/locale/de';
 import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
 import TimeDots from './TimeDots';
+import { TIMELINE_MARGIN } from '../../redux/constants/uiConstants';
 import './TimeDots.css';
 
 export const TimeDotsContainerComponent = ({
@@ -17,7 +18,7 @@ export const TimeDotsContainerComponent = ({
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
-	const { scaleFunc } = getTimelineZoomOptions({
+	const { scaleFunc, offset } = getTimelineZoomOptions({
 		width: timelineWidth,
 		zoomStart,
 		zoomEnd,
@@ -29,9 +30,12 @@ export const TimeDotsContainerComponent = ({
 	const dots = [{
 		key: 'mousePointer',
 		color: '#0087F2',
-		position: mouseX,
-		tooltipContent: moment(scaleFunc.invert(mouseX - 100)).format('LL'),
+		position: mouseX + offset,
+		tooltipContent: moment(
+			scaleFunc.invert(-TIMELINE_MARGIN + mouseX + offset)
+		).format('LL'),
 		show: true,
+		offset,
 	}];
 
 	if (selectedEvent) {
@@ -42,8 +46,9 @@ export const TimeDotsContainerComponent = ({
 		dots.push({
 			key: selectedEvent.id,
 			color: selectedEventColor,
-			position: scaleFunc(selectedEvent.data.startDate) + 380,
+			position: scaleFunc(selectedEvent.data.startDate) + TIMELINE_MARGIN,
 			tooltipContent: moment(selectedEvent.data.startDate).format('LL'),
+			offset,
 		});
 	}
 	return <TimeDots dots={dots} />;
