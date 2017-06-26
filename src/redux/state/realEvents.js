@@ -1053,7 +1053,7 @@ const rawEvents = [
 		category: 'design-attitude',
 		title: 'Google schaut zu',
 		text: 'Ein anonyme Nutzer-Leak hat Beweise veröffentlicht, welche zeigen, dass Google bereits seit März 2018 zugriff auf alle Überwachungskameras der Deutsche Regierung hat. Ob die Bundesregierung darüber in Kenntnis war ist noch unklar. Ein Statement von dieser Seite steht noch aus.\n \nGoogle hat in einer Stellungsnahme bekannt gegeben, die Daten ausschließlich für Werbezwecke einzusetzen, damit noch angepasstere Werbung für den einzelnen Benutzer, auf den Werbeplattformen dargestellt werden. Google sagt, dass sie natürlich Gesichtserkennung nutzen, diese aber anschließend anonimisieren, damit der einzelne geschützt ist. Ausschließlich der Google-Nutzername wird gespeichert und die Daten hiermit weiterverarbeitet.\n \nSeit dem 14.03.2019 ist das “Terror-Bekämpfungs-Gesetz”, unter der AFD Regierung, in Kraft getreten, welches Überwachungskameras in einer dichte von 5 Stück auf 100m² vorsieht. Dies geschah nach Londoner Vorbild und gilt auch für dünn besiedelte Gebiete, wie etwa Brandenburg. In Großstädten wie Berlin kommen sogar bis zu durchschnittlich 30 Kameras auf 100m².\n \nHeinz Buhrstett - Süddeutsche Zeitung',
-		startDate: new Date('2026-09-13T22:00:00.000Z'),
+		startDate: new Date('2027-09-13T22:00:00.000Z'),
 		type: 'text',
 		future: 'extreme',
 		titleImage: 'https://cdn.pixabay.com/photo/2017/01/01/04/05/camera-1944039_1280.jpg ',
