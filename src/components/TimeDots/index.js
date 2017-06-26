@@ -12,12 +12,13 @@ export const TimeDotsContainerComponent = ({
 	categories,
 	zoom: { start: zoomStart, end: zoomEnd },
 	mouseX,
+	ui: { timelineWidth },
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
 	const { scaleFunc } = getTimelineZoomOptions({
-		width: document.documentElement.clientWidth,
+		width: timelineWidth,
 		zoomStart,
 		zoomEnd,
 		minDate: eventsByDate[0].data.startDate,
@@ -73,8 +74,11 @@ TimeDotsContainerComponent.propTypes = {
 		end: PropTypes.number.isRequired,
 	}).isRequired,
 	mouseX: PropTypes.number.isRequired,
+	ui: PropTypes.shape({
+		timelineWidth: PropTypes.number.isRequired,
+	}).isRequired,
 };
 
-const mapStateToProps = ({ events, categories, zoom, mouse: { mouseX } }) =>
-	({ events, categories, zoom, mouseX });
+const mapStateToProps = ({ events, categories, zoom, mouse: { mouseX }, ui }) =>
+	({ events, categories, zoom, mouseX, ui });
 export default connect(mapStateToProps)(TimeDotsContainerComponent);

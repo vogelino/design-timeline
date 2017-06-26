@@ -14,12 +14,13 @@ export const EventsLanesComponent = ({
 	categories,
 	zoom: { start: zoomStart, end: zoomEnd },
 	actions: { setMouseCoordinates },
+	ui: { timelineWidth },
 }) => {
 	const eventsByDate = events.sort((evt1, evt2) =>
 		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 	);
 	const { scaleFunc, totalWidth } = getTimelineZoomOptions({
-		width: document.documentElement.clientWidth,
+		width: timelineWidth,
 		zoomStart,
 		zoomEnd,
 		minDate: eventsByDate[0].data.startDate,
@@ -95,9 +96,13 @@ EventsLanesComponent.propTypes = {
 	actions: PropTypes.shape({
 		setMouseCoordinates: PropTypes.func.isRequired,
 	}).isRequired,
+	ui: PropTypes.shape({
+		timelineWidth: PropTypes.number.isRequired,
+	}).isRequired,
 };
 
-const mapStateToProps = ({ events, categories, zoom }) => ({ events, categories, zoom });
+const mapStateToProps = ({ events, categories, zoom, ui }) =>
+	({ events, categories, zoom, ui });
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(mouseActions, dispatch),
 });
