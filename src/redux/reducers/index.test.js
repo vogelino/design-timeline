@@ -7,5 +7,6 @@ test('root reducer should return an object with all reducer keys', () => {
 		'categories',
 		'zoom',
 		'mouse',
+		'ui',
 	]);
 });
