@@ -2,7 +2,7 @@ import uuid from 'uuid/v4';
 import { de_DE as casual } from 'casual-cjs';
 
 const createTitleImage = () =>
-	`http://placekitten.com/${casual.integer(300, 1500)}/${casual.integer(300, 1500)}`;
+	`https://placeimg.com/${casual.integer(300, 1500)}/${casual.integer(300, 1500)}/tech`;
 
 const createVideo = () => ({
 	url: casual.random_element([
@@ -30,17 +30,17 @@ const createFaxeEvent = () => ({
 		author: casual.full_name,
 		text: casual.text,
 		category: casual.random_element([
-			'design-thinking',
+			'artificial-intelligence-deep-learning-machine-learning',
 			'big-data',
+			'critical-speculative-fiction-design',
+			'portfolio-businessmodel-job-offers',
+			'design-thinking',
 			'data-literacy',
+			'filter-bubble',
 			'design-attitude',
 			'new-work',
-			'filter-bubble',
+			'design-niche',
 			'privacy-monitoring-tracking',
-			'critical-speculative-fiction-design',
-			'artificial-intelligence-deep-learning-machine-learning',
-			'portfolio-businessmodel-job-offers',
-			'interface-interaction-service-social-sustainable-business-strategy-design',
 		]),
 		type: casual.random_element([
 			'audio',
