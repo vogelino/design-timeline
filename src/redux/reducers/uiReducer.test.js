@@ -1,6 +1,6 @@
 /* global test, expect */
 import uiReducer, { uiInitialState } from './uiReducer';
-import { setUiDimentions } from '../actions/uiActions';
+import { setUiDimensions } from '../actions/uiActions';
 import {
 	SIDEBAR_WIDTH,
 	TOPICS_LIST_WIDTH,
@@ -22,7 +22,7 @@ test('uiReducer should return calculated timeline size', () => {
 		width: 1000,
 		height: 1000,
 	};
-	const action = setUiDimentions(actionPayload);
+	const action = setUiDimensions(actionPayload);
 	const expectedState = {
 		windowWidth: actionPayload.width,
 		windowHeight: actionPayload.height,

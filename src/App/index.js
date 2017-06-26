@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContainer from './AppContainer';
 import EventsLanes from '../components/EventsLane';
 import Sidebar from '../components/Sidebar';
 import MinimapZoom from '../components/MinimapZoom';
@@ -8,14 +9,14 @@ import TimeDots from '../components/TimeDots';
 import './App.css';
 
 const App = () => (
-	<div className="appContainer">
+	<AppContainer>
 		<EventsLanes />
 		<MinimapZoom />
 		<Sidebar />
 		<TopicsList />
 		<Header />
 		<TimeDots />
-	</div>
+	</AppContainer>
 );
 
 export default App;

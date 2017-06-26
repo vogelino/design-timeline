@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 
-export const setUiDimentions = (payload) => ({
+export const setUiDimensions = (payload) => ({
 	type: types.WINDOW_RESIZED,
 	payload,
 });
