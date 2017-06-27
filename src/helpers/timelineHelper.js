@@ -28,18 +28,3 @@ export const getTimelineZoomOptions = ({
 	});
 	return { width, totalWidth, offset, scaleFunc };
 };
-
-export const getTimelineZoom = ({
-	currentZoomStart = mandatory('currentZoomStart'),
-	currentZoomEnd = mandatory('currentZoomEnd'),
-	offset = mandatory('offset'),
-	totalWidth = mandatory('totalWidth'),
-}) => {
-	const visiblePortionPercentage = currentZoomEnd - currentZoomStart;
-	const zoomStart = (offset / totalWidth) * HUNDRED_PERCENT;
-	const zoomEnd = zoomStart + visiblePortionPercentage;
-	return {
-		zoomStart,
-		zoomEnd,
-	};
-};
