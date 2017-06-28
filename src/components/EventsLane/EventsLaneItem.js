@@ -15,13 +15,20 @@ const EventsLaneItem = ({
 	onMouseLeave,
 	position: left,
 	color,
+	className,
+	classNamePrefix,
 }) => (
 	<button
 		className={combineCssClasses({
+			[className]: className,
 			'events-lane_item': true,
 			'events-lane_item--hovered': hovered,
 			'events-lane_item--selected': selected,
 			[`events-lane_item--${future}`]: future,
+			[`${classNamePrefix}_events-lane_item`]: true,
+			[`${classNamePrefix}_events-lane_item--hovered`]: hovered,
+			[`${classNamePrefix}_events-lane_item--selected`]: selected,
+			[`${classNamePrefix}_events-lane_item--${future}`]: future && className,
 		})}
 		id={id}
 		style={{ left, color }}
@@ -36,6 +43,10 @@ const EventsLaneItem = ({
 				'events-lane_itemsymbol--hovered': hovered,
 				'events-lane_itemsymbol--selected': selected,
 				[`events-lane_itemsymbol--${future}`]: future,
+				[`${classNamePrefix}_events-lane_itemsymbol`]: true,
+				[`${classNamePrefix}_events-lane_itemsymbol--hovered`]: hovered,
+				[`${classNamePrefix}_events-lane_itemsymbol--selected`]: selected,
+				[`${classNamePrefix}_events-lane_itemsymbol--${future}`]: future && className,
 			})}
 		/>
 		<Tooltip
@@ -49,6 +60,8 @@ const EventsLaneItem = ({
 
 const placeholderFunc = (x) => x;
 EventsLaneItem.defaultProps = {
+	className: '',
+	classNamePrefix: '',
 	title: '',
 	type: 'text',
 	future: undefined,
@@ -62,6 +75,8 @@ EventsLaneItem.defaultProps = {
 };
 
 EventsLaneItem.propTypes = {
+	className: PropTypes.string,
+	classNamePrefix: PropTypes.string,
 	id: PropTypes.string.isRequired,
 	title: PropTypes.string,
 	type: PropTypes.string,

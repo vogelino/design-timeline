@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TIMELINE_MARGIN } from '../../redux/constants/uiConstants';
 
 const SelectionMarker = ({ date, color: backgroundColor, scaleFunc }) => (
 	<div
 		className="selectionMarker"
 		style={{
-			left: scaleFunc(date) + 100,
+			left: scaleFunc(date) + TIMELINE_MARGIN,
 			backgroundColor,
 		}}
 	/>

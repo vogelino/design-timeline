@@ -14,7 +14,8 @@ export const TimeDotsContainerComponent = ({
 	mouseX,
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 }) => {
-	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
+	const timelineWidth = totalWidth - (2 * TIMELINE_MARGIN);
+	const scaleFunc = createScaleFunction({ totalWidth: timelineWidth, minDate, maxDate });
 
 	const selectedEvent = events.find(({ state: { selected } }) => selected);
 

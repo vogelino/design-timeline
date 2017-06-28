@@ -21,7 +21,8 @@ export const EventsLanesComponent = ({
 	actions: { setMouseCoordinates, setHoveredStatus, selectEvent },
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 }) => {
-	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
+	const timelineWidth = totalWidth - (2 * TIMELINE_MARGIN);
+	const scaleFunc = createScaleFunction({ totalWidth: timelineWidth, minDate, maxDate });
 	const lanes = getLanes({ categories, events, scaleFunc, margin: TIMELINE_MARGIN });
 	const selectedEvent = getSelectedEvent({ categories, events });
 	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);

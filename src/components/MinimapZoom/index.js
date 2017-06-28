@@ -4,7 +4,9 @@ import Zoom from './Zoom';
 
 export default () => (
 	<div className="minimapZoom">
-		<Zoom />
-		<Minimap />
+		<div className="minimapZoom_wrapper">
+			<Zoom />
+			<Minimap />
+		</div>
 	</div>
 );

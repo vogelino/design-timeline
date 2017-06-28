@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createScaleFunction, getLanes } from '../../helpers/timelineHelper';
 import { SIDEBAR_WIDTH, MINIMAP_MARGIN } from '../../redux/constants/uiConstants';
+import EventsLane from '../EventsLane/EventsLane';
 import './MinimapZoom.css';
 
 export const MinimapComponent = ({
@@ -15,7 +16,17 @@ export const MinimapComponent = ({
 	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
 	const lanes = getLanes({ categories, events, scaleFunc });
 	return (
-		<div className="minimapZoom" />
+		<div className="minimap">
+			{lanes.map(({ laneSlug, laneEvents }) => (
+				<EventsLane
+					key={laneSlug}
+					classNamePrefix="minimap"
+					className={laneSlug}
+					events={laneEvents}
+					width={totalWidth}
+				/>
+			))}
+		</div>
 	);
 };
 

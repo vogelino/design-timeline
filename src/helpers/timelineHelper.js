@@ -7,7 +7,8 @@ export const createScaleFunction = ({
 	totalWidth = mandatory('totalWidth'),
 	minDate = mandatory('minDate'),
 	maxDate = mandatory('maxDate'),
-}) => scaleTime().domain([minDate, maxDate]).range([0, totalWidth]);
+	margin = 0,
+}) => scaleTime().domain([minDate, maxDate]).range([0, totalWidth - (2 * margin)]);
 
 export const getTimelineZoomOptions = ({
 	zoomStart = mandatory('zoomStart'),
@@ -18,8 +19,8 @@ export const getTimelineZoomOptions = ({
 } = mandatory('main object')) => {
 	const visiblePortionPercentage = zoomEnd - zoomStart;
 	const totalWidthMultiplier = HUNDRED_PERCENT / visiblePortionPercentage;
-	const totalWidth = width * totalWidthMultiplier;
-	const offset = (totalWidth * zoomStart) / HUNDRED_PERCENT;
+	const totalWidth = (width * totalWidthMultiplier);
+	const offset = ((totalWidth) * zoomStart) / HUNDRED_PERCENT;
 	return { totalWidth, offset, minDate, maxDate };
 };
 

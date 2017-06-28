@@ -1,10 +1,48 @@
-.minimapZoom {
-	position: absolute;
+.minimapZoom,
+.minimapZoom_wrapper,
+.minimap {
 	width: 100%;
 	height: 47px;
+	box-sizing: border-box;
+}
+
+.minimapZoom {
+	padding-left: 280px;
+	background: #EFF7FF;
+	box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.minimapZoom_wrapper {
+	position: relative;
+}
+
+.minimapZoom,
+.minimap {
+	position: absolute;
 	bottom: 0;
 	left: 0;
-	box-sizing: border-box;
-	padding-left: 280px;
-	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.05);
+}
+
+.minimap {
+	display: flex;
+	flex-direction: column;
+	pointer-events: none;
+	overflow: hidden;
+	padding: 2px 20px;
+}
+
+.minimap_events-lane {
+	flex-basis: 4px;
+	padding: 0;
+}
+
+.minimap_events-lane_item,
+.minimap_events-lane_itemsymbol {
+	width: 3px;
+	height: 3px;
+}
+
+.minimap_events-lane_item .tooltip {
+	transform-origin: bottom left;
+	transform: scale(0.1);
 }
