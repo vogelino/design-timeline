@@ -5,11 +5,16 @@ import Tooltip from '../Tooltip';
 
 const EventsLaneItem = ({
 	id,
-	data: { title, startDate, type, future },
-	state: { selected, hovered },
-	scaleFunc,
+	title,
+	type,
+	future,
+	selected,
+	hovered,
+	onClick,
+	onMouseEnter,
+	onMouseLeave,
+	position: left,
 	color,
-	...rest
 }) => (
 	<button
 		className={combineCssClasses({
@@ -19,9 +24,11 @@ const EventsLaneItem = ({
 			[`events-lane_item--${future}`]: future,
 		})}
 		id={id}
-		style={{ left: scaleFunc(startDate) + 100, color }}
+		style={{ left, color }}
 		title={title}
-		{...rest}
+		onClick={onClick}
+		onMouseEnter={onMouseEnter}
+		onMouseLeave={onMouseLeave}
 	>
 		<span
 			className={combineCssClasses({
@@ -40,20 +47,32 @@ const EventsLaneItem = ({
 	</button>
 );
 
+const placeholderFunc = (x) => x;
+EventsLaneItem.defaultProps = {
+	title: '',
+	type: 'text',
+	future: undefined,
+	selected: false,
+	hovered: false,
+	position: 0,
+	color: '#BADA55',
+	onClick: placeholderFunc,
+	onMouseEnter: placeholderFunc,
+	onMouseLeave: placeholderFunc,
+};
+
 EventsLaneItem.propTypes = {
 	id: PropTypes.string.isRequired,
-	data: PropTypes.shape({
-		title: PropTypes.string.isRequired,
-		type: PropTypes.string.isRequired,
-		startDate: PropTypes.instanceOf(Date).isRequired,
-		future: PropTypes.oneOf(['trend', 'extreme']),
-	}).isRequired,
-	state: PropTypes.shape({
-		selected: PropTypes.bool.isRequired,
-		hovered: PropTypes.bool.isRequired,
-	}).isRequired,
-	scaleFunc: PropTypes.func.isRequired,
-	color: PropTypes.string.isRequired,
+	title: PropTypes.string,
+	type: PropTypes.string,
+	future: PropTypes.oneOf(['trend', 'extreme']),
+	selected: PropTypes.bool,
+	hovered: PropTypes.bool,
+	position: PropTypes.number,
+	color: PropTypes.string,
+	onClick: PropTypes.func,
+	onMouseEnter: PropTypes.func,
+	onMouseLeave: PropTypes.func,
 };
 
 export default EventsLaneItem;

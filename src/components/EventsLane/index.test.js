@@ -17,7 +17,11 @@ it('renders without crashing', () => {
 				maxDate: new Date(),
 			}}
 			setZoomStart={() => {}}
-			actions={{ setMouseCoordinates: (x) => x, setZoom: (x) => x }}
+			actions={{
+				setMouseCoordinates: (x) => x,
+				selectEvent: (x) => x,
+				setHoveredStatus: (x) => x,
+			}}
 		/>
 	);
 });

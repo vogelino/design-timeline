@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import throttle from 'throttle-debounce/throttle';
-import { createScaleFunction } from '../../helpers/timelineHelper';
+import { createScaleFunction, getLanes, getSelectedEvent } from '../../helpers/timelineHelper';
 import * as mouseActions from '../../redux/actions/mouseActions';
+import * as eventsActions from '../../redux/actions/eventsActions';
 import EventsLane from './EventsLane';
 import SelectionMarker from './SelectionMarker';
 import {
@@ -17,21 +18,12 @@ import './EventsLane.css';
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	actions: { setMouseCoordinates },
+	actions: { setMouseCoordinates, setHoveredStatus, selectEvent },
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 }) => {
 	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
-	const lanes = categories.map((category) => ({
-		laneTitle: category.title,
-		laneSlug: category.slug,
-		laneColor: category.color,
-		laneEvents: events.filter(({ data: { category: eventCategory } }) =>
-			category.slug === eventCategory),
-	}));
-	const selectedEvent = events.find(({ state: { selected } }) => selected);
-	const selectedEventColor = selectedEvent ? categories.find(({ slug }) =>
-		slug === selectedEvent.data.category
-	).color : 'transparent';
+	const lanes = getLanes({ categories, events, scaleFunc, margin: TIMELINE_MARGIN });
+	const selectedEvent = getSelectedEvent({ categories, events });
 	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);
 	return (
 		<div
@@ -51,13 +43,16 @@ export const EventsLanesComponent = ({
 				}}
 			>
 				<div className="events-lanes_lanes">
-					{lanes.map(({ laneSlug, laneColor, laneEvents }) => (
+					{lanes.map(({ laneSlug, laneEvents }) => (
 						<EventsLane
 							key={laneSlug}
 							className={laneSlug}
-							events={laneEvents}
-							scaleFunc={scaleFunc}
-							color={laneColor}
+							events={laneEvents.map((event) => ({
+								...event,
+								onClick: () => selectEvent(event.id),
+								onMouseEnter: () => setHoveredStatus(event.id, true),
+								onMouseLeave: () => setHoveredStatus(event.id, false),
+							}))}
 							width={totalWidth}
 						/>
 					))}
@@ -66,7 +61,7 @@ export const EventsLanesComponent = ({
 					selectedEvent ?
 						<SelectionMarker
 							date={selectedEvent.data.startDate}
-							color={selectedEventColor}
+							color={selectedEvent.color}
 							scaleFunc={scaleFunc}
 						/> : null
 				}
@@ -97,6 +92,8 @@ EventsLanesComponent.propTypes = {
 	).isRequired,
 	actions: PropTypes.shape({
 		setMouseCoordinates: PropTypes.func.isRequired,
+		selectEvent: PropTypes.func.isRequired,
+		setHoveredStatus: PropTypes.func.isRequired,
 	}).isRequired,
 	mainTimeline: PropTypes.shape({
 		offset: PropTypes.number.isRequired,
@@ -109,6 +106,9 @@ EventsLanesComponent.propTypes = {
 const mapStateToProps = ({ events, categories, mainTimeline }) =>
 	({ events, categories, mainTimeline });
 const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators(mouseActions, dispatch),
+	actions: bindActionCreators({
+		...mouseActions,
+		...eventsActions,
+	}, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EventsLanesComponent);
