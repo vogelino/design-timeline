@@ -6,7 +6,7 @@ const mandatory = (parameterName) => {
 	throw new Error(`Missing mandatory parmeter: "${parameterName}!!"`);
 };
 
-const createScaleFunction = ({
+export const createScaleFunction = ({
 	totalWidth = mandatory('totalWidth'),
 	minDate = mandatory('minDate'),
 	maxDate = mandatory('maxDate'),
@@ -23,8 +23,5 @@ export const getTimelineZoomOptions = ({
 	const totalWidthMultiplier = HUNDRED_PERCENT / visiblePortionPercentage;
 	const totalWidth = width * totalWidthMultiplier;
 	const offset = (totalWidth * zoomStart) / HUNDRED_PERCENT;
-	const scaleFunc = createScaleFunction({
-		minDate, maxDate, totalWidth,
-	});
-	return { width, totalWidth, offset, scaleFunc };
+	return { totalWidth, offset, minDate, maxDate };
 };

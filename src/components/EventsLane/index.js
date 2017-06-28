@@ -3,31 +3,24 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import throttle from 'throttle-debounce/throttle';
-import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
+import { createScaleFunction } from '../../helpers/timelineHelper';
 import * as mouseActions from '../../redux/actions/mouseActions';
 import EventsLane from './EventsLane';
 import SelectionMarker from './SelectionMarker';
-import { SIDEBAR_WIDTH, HEADER_HEIGHT } from '../../redux/constants/uiConstants';
+import {
+	SIDEBAR_WIDTH,
+	HEADER_HEIGHT,
+	TIMELINE_MARGIN,
+} from '../../redux/constants/uiConstants';
 import './EventsLane.css';
 
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	zoom: { start: zoomStart, end: zoomEnd },
 	actions: { setMouseCoordinates },
-	ui: { timelineWidth },
+	mainTimeline: { offset, totalWidth, minDate, maxDate },
 }) => {
-	const eventsByDate = events.sort((evt1, evt2) =>
-		evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
-	);
-	const { scaleFunc, totalWidth, offset } = getTimelineZoomOptions({
-		width: timelineWidth,
-		zoomStart,
-		zoomEnd,
-		minDate: eventsByDate[0].data.startDate,
-		maxDate: eventsByDate[events.length - 1].data.startDate,
-	});
-
+	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
 	const lanes = categories.map((category) => ({
 		laneTitle: category.title,
 		laneSlug: category.slug,
@@ -54,7 +47,7 @@ export const EventsLanesComponent = ({
 				className="events-lanes_wrapper"
 				style={{
 					transform: `translateX(-${offset}px)`,
-					width: totalWidth + 200,
+					width: totalWidth + (TIMELINE_MARGIN * 2),
 				}}
 			>
 				<div className="events-lanes_lanes">
@@ -102,20 +95,19 @@ EventsLanesComponent.propTypes = {
 			color: PropTypes.string.isRequired,
 		}),
 	).isRequired,
-	zoom: PropTypes.shape({
-		start: PropTypes.number.isRequired,
-		end: PropTypes.number.isRequired,
-	}).isRequired,
 	actions: PropTypes.shape({
 		setMouseCoordinates: PropTypes.func.isRequired,
 	}).isRequired,
-	ui: PropTypes.shape({
-		timelineWidth: PropTypes.number.isRequired,
-	}).isRequired,
+	mainTimeline: PropTypes.shape({
+		offset: PropTypes.number.isRequired,
+		totalWidth: PropTypes.number.isRequired,
+		minDate: PropTypes.instanceOf(Date).isRequired,
+		maxDate: PropTypes.instanceOf(Date).isRequired,
+	}),
 };
 
-const mapStateToProps = ({ events, categories, zoom, ui }) =>
-	({ events, categories, zoom, ui });
+const mapStateToProps = ({ events, categories, mainTimeline }) =>
+	({ events, categories, mainTimeline });
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators(mouseActions, dispatch),
 });

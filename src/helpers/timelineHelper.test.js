@@ -3,6 +3,7 @@ import { getTimelineZoomOptions } from './timelineHelper';
 
 const getParametersObject = (toMerge = {}) => Object.assign({}, {
 	width: 100,
+	totalWidth: 1000,
 	zoomStart: 0,
 	zoomEnd: 0,
 	minDate: new Date('01.01.1999'),
@@ -34,14 +35,6 @@ describe('getTimelineZoomOptions', () => {
 		}))).toThrowError('Missing mandatory parmeter: "maxDate!!"');
 	});
 
-	it('returns the same width as given', () => {
-		const expectedWidth = 100;
-		const { width } = getTimelineZoomOptions(getParametersObject({
-			width: expectedWidth,
-		}));
-		expect(width).toEqual(expectedWidth);
-	});
-
 	it('returns the calculated totalWidth based on the params', () => {
 		const { totalWidth } = getTimelineZoomOptions(getParametersObject({
 			zoomStart: 20,
@@ -60,27 +53,5 @@ describe('getTimelineZoomOptions', () => {
 		}));
 		const expectedOffset = 200;
 		expect(offset).toEqual(expectedOffset);
-	});
-
-	describe('scale function', () => {
-		it('is a function', () => {
-			const { scaleFunc } = getTimelineZoomOptions(getParametersObject());
-			expect(typeof scaleFunc).toBe('function');
-		});
-
-		it('return the right translated values when called', () => {
-			const minDate = new Date('01.01.2000');
-			const maxDate = new Date('01.20.2000');
-			const { scaleFunc } = getTimelineZoomOptions({
-				zoomStart: 20,
-				zoomEnd: 80,
-				width: 600,
-				minDate,
-				maxDate,
-			});
-			expect(scaleFunc(minDate)).toBe(0);
-			expect(scaleFunc(new Date('01.10.2000'))).toBe(473.6842105263158);
-			expect(scaleFunc(maxDate)).toBe(1000);
-		});
 	});
 });

@@ -8,5 +8,6 @@ test('root reducer should return an object with all reducer keys', () => {
 		'zoom',
 		'mouse',
 		'ui',
+		'mainTimeline',
 	]);
 });

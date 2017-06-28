@@ -10,10 +10,14 @@ it('renders without crashing', () => {
 		<EventsLanesComponent
 			events={eventsInitalState}
 			categories={initialCategories}
-			zoom={{ start: 0, end: 100 }}
+			mainTimeline={{
+				offset: 0,
+				totalWidth: 0,
+				minDate: new Date(),
+				maxDate: new Date(),
+			}}
 			setZoomStart={() => {}}
 			actions={{ setMouseCoordinates: (x) => x, setZoom: (x) => x }}
-			ui={{ timelineWidth: 0 }}
 		/>
 	);
 });

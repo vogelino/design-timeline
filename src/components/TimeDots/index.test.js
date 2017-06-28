@@ -10,10 +10,14 @@ it('renders without crashing', () => {
 		<TimeDotsContainerComponent
 			events={eventsInitalState}
 			categories={initialCategories}
-			zoom={{ start: 0, end: 100 }}
 			dots={[]}
 			mouseX={0}
-			ui={{ timelineWidth: 0 }}
+			mainTimeline={{
+				offset: 0,
+				totalWidth: 0,
+				minDate: new Date(),
+				maxDate: new Date(),
+			}}
 		/>
 	);
 });
