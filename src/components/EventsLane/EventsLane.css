@@ -5,8 +5,31 @@
 	margin: 0;
 	padding: 0;
 	position: relative;
-	overflow: hidden;
 	background: #EFF7FF;
+	box-sizing: border-box;
+}
+
+.events-lanes {
+	overflow: hidden;
+}
+
+.events-lanes_wrapper {
+	padding-top: 40px;
+}
+
+.events-lane_dateaxis {
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	top: 0;
+	left: 20px;
+}
+
+.events-lane_datelabel {
+	position: absolute;
+	top: 20px;
+	transform: translateX(-50%);
+	color: #7394AE;
 }
 
 .events-lanes_lanes {
@@ -17,13 +40,11 @@
 	padding: 0;
 	position: absolute;
 	flex-direction: column;
-	overflow-x: hidden; /* Change later */
-	overflow-y: hidden;
 }
 
 .events-lane {
 	flex: 1 0 48px;
-	padding: 0 100px;
+	padding: 0;
 	position: relative;
 	z-index: 1;
 }
@@ -103,6 +124,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 1px;
 	height: 100%;
+	width: 1px;
 }
