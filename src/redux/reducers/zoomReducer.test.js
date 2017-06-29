@@ -3,8 +3,8 @@ import * as types from '../actions/actionTypes';
 import zoomReducer, { zoomInitialState } from './zoomReducer';
 
 it('should return the initial state when given no params', () => {
-	expect(zoomReducer().start).toBe(0);
-	expect(zoomReducer().end).toBe(100);
+	expect(zoomReducer().start).toBe(zoomInitialState.start);
+	expect(zoomReducer().end).toBe(zoomInitialState.end);
 });
 
 it('should return the state when the action in not recognized', () => {

@@ -1,6 +1,11 @@
 .minimapZoom,
 .minimapZoom_wrapper,
-.minimap {
+.minimap,
+.zoom,
+.zoom_handler,
+.zoom_visiblepart,
+.zoom_startoffset,
+.zoom_endoffset {
 	width: 100%;
 	height: 47px;
 	box-sizing: border-box;
@@ -16,8 +21,13 @@
 	position: relative;
 }
 
+.zoom,
+.minimap,
 .minimapZoom,
-.minimap {
+.zoom_handler,
+.zoom_visiblepart,
+.zoom_startoffset,
+.zoom_endoffset {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -28,7 +38,11 @@
 	flex-direction: column;
 	pointer-events: none;
 	overflow: hidden;
-	padding: 2px 20px;
+	padding: 2px 0;
+}
+
+.zoom {
+	z-index: 1;
 }
 
 .minimap_events-lane {
@@ -45,4 +59,64 @@
 .minimap_events-lane_item .tooltip {
 	transform-origin: bottom left;
 	transform: scale(0.1);
+}
+
+.zoom_startoffset,
+.zoom_endoffset {
+	background: #0087F2;
+	opacity: .2;
+}
+
+.zoom_handler {
+	width: 6px;
+	text-align: center;
+	cursor: grab;
+}
+
+.zoom_startoffset {
+	left: 0;
+}
+
+.zoom_endoffset,
+.zoom_endHandler {
+	right: 0;
+	left: auto;
+}
+
+.zoom_visiblepart {
+	background: red;
+	opacity: .2;
+}
+
+.zoom_startHandler {
+	transform: translateX(-50%);
+}
+
+.zoom_endHandler {
+	transform: translateX(50%);
+}
+
+.zoom_handlerwrapper {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.zoom_handlerbar,
+.zoom_handlergrabber {
+	width: 1px;
+	height: 47px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #0087F2;
+	top: 0;
+}
+
+.zoom_handlergrabber {
+	width: 6px;
+	height: 22px;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 3px;
 }

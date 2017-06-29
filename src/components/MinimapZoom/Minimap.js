@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { createScaleFunction, getLanes } from '../../helpers/timelineHelper';
 import { SIDEBAR_WIDTH, MINIMAP_MARGIN } from '../../redux/constants/uiConstants';
 import EventsLane from '../EventsLane/EventsLane';
-import './MinimapZoom.css';
 
 export const MinimapComponent = ({
 	events,
