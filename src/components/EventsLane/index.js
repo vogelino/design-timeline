@@ -62,7 +62,7 @@ export const EventsLanesComponent = ({
 				<div className="events-lane_dateaxis">
 					{timeLabels.map(({ text, position, moment }) => (
 						<span
-							key={moment.year()}
+							key={moment.toISOString()}
 							className="events-lane_datelabel"
 							style={{ left: position }}
 						>

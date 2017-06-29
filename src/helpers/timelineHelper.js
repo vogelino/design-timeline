@@ -78,8 +78,15 @@ export const getSelectedEvent = ({
 	};
 };
 
+const createUnit = (unit, formatter) => (unitsAmount) => ({
+	unit,
+	unitsAmount,
+	formatter,
+});
+
 const getTimelineUnit = (visibleDuration = mandatory('visibleDuration')) => {
 	const yearAmount = visibleDuration.asYears();
+	const createYearUnit = createUnit('year', (m) => m.year());
 
 	const CENTURIES_YEARS_AMOUNT = 100;
 	const HALFCENTURIES_YEARS_AMOUNT = 50;
@@ -88,45 +95,24 @@ const getTimelineUnit = (visibleDuration = mandatory('visibleDuration')) => {
 	const PAIR_YEARS_AMOUNT = 2;
 
 	if (yearAmount / CENTURIES_YEARS_AMOUNT > UNITS_PER_VIEW) {
-		return {
-			name: 'centuries',
-			unit: 'year',
-			momentUnitsAmount: CENTURIES_YEARS_AMOUNT,
-		};
+		return createYearUnit(CENTURIES_YEARS_AMOUNT);
 	}
 	if (yearAmount / HALFCENTURIES_YEARS_AMOUNT > UNITS_PER_VIEW) {
-		return {
-			name: 'halfCenturies',
-			unit: 'year',
-			unitsAmount: HALFCENTURIES_YEARS_AMOUNT,
-		};
+		return createYearUnit(HALFCENTURIES_YEARS_AMOUNT);
 	}
 	if (yearAmount / DECADES_YEARS_AMOUNT > UNITS_PER_VIEW) {
-		return {
-			name: 'decades',
-			unit: 'year',
-			unitsAmount: DECADES_YEARS_AMOUNT,
-		};
+		return createYearUnit(DECADES_YEARS_AMOUNT);
 	}
 	if (yearAmount / HALFDECADES_YEARS_AMOUNT > UNITS_PER_VIEW) {
-		return {
-			name: 'halfDecades',
-			unit: 'year',
-			unitsAmount: HALFDECADES_YEARS_AMOUNT,
-		};
+		return createYearUnit(HALFDECADES_YEARS_AMOUNT);
 	}
 	if (yearAmount / PAIR_YEARS_AMOUNT > UNITS_PER_VIEW) {
-		return {
-			name: 'halfDecades',
-			unit: 'year',
-			unitsAmount: PAIR_YEARS_AMOUNT,
-		};
+		return createYearUnit(PAIR_YEARS_AMOUNT);
 	}
-	return {
-		name: 'years',
-		unit: 'year',
-		unitsAmount: 1,
-	};
+	if (yearAmount > UNITS_PER_VIEW) {
+		return createYearUnit(1);
+	}
+	return createUnit('month', (m) => m.format('MMM YYYY'))(1);
 };
 
 export const getTimeLabels = ({
@@ -141,7 +127,7 @@ export const getTimeLabels = ({
 	const visibleEndDate = scaleFunc.invert(-TIMELINE_MARGIN + timelineWidth + offset);
 	const visibleDiff = moment(visibleEndDate).diff(moment(visibleStartDate), 'milliseconds');
 	const visibleDuration = moment.duration(Math.abs(visibleDiff));
-	const { unit, unitsAmount } = getTimelineUnit(visibleDuration);
+	const { unit, unitsAmount, formatter } = getTimelineUnit(visibleDuration);
 	const startDate = moment(totalStartDate).year();
 	const startLabelRawValue = Math.ceil(startDate / unitsAmount) * unitsAmount;
 	const startLabelMomentDate = moment(String(startLabelRawValue));
@@ -153,7 +139,7 @@ export const getTimeLabels = ({
 	return Array
 		.from(datesRange.by(unit, { step: unitsAmount }))
 		.map((m) => ({
-			text: String(m.year()),
+			text: formatter(m),
 			moment: m,
 			position: scaleFunc(m.toDate()),
 		}));
