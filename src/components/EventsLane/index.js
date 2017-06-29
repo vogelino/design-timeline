@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 import throttle from 'throttle-debounce/throttle';
 import * as mouseActions from '../../redux/actions/mouseActions';
 import * as eventsActions from '../../redux/actions/eventsActions';
-import EventsLane from './EventsLane';
 import SelectionMarker from './SelectionMarker';
+import EventsLaneTimeAxis from './EventsLaneTimeAxis';
+import EventsLanes from './EventsLanes';
 import {
 	createScaleFunction,
-	getLanes,
 	getSelectedEvent,
-	getTimeLabels,
 } from '../../helpers/timelineHelper';
 import {
 	SIDEBAR_WIDTH,
@@ -25,20 +24,13 @@ export const EventsLanesComponent = ({
 	categories,
 	actions: { setMouseCoordinates, setHoveredStatus, selectEvent },
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
-	ui: { timelineWidth },
+	ui: { timelineWidth: visibleWidth },
 }) => {
 	const timelineTotalWidth = totalWidth - (2 * TIMELINE_MARGIN);
 	const scaleFunc = createScaleFunction({
 		totalWidth: timelineTotalWidth,
 		minDate,
 		maxDate,
-	});
-	const lanes = getLanes({ categories, events, scaleFunc, margin: TIMELINE_MARGIN });
-	const timeLabels = getTimeLabels({
-		totalWidth: timelineTotalWidth,
-		scaleFunc,
-		offset,
-		timelineWidth,
 	});
 	const selectedEvent = getSelectedEvent({ categories, events });
 	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);
@@ -59,32 +51,20 @@ export const EventsLanesComponent = ({
 					width: totalWidth,
 				}}
 			>
-				<div className="events-lane_dateaxis">
-					{timeLabels.map(({ text, position, moment }) => (
-						<span
-							key={moment.toISOString()}
-							className="events-lane_datelabel"
-							style={{ left: position }}
-						>
-							{text}
-						</span>
-					))}
-				</div>
-				<div className="events-lanes_lanes">
-					{lanes.map(({ laneSlug, laneEvents }) => (
-						<EventsLane
-							key={laneSlug}
-							className={laneSlug}
-							events={laneEvents.map((event) => ({
-								...event,
-								onClick: () => selectEvent(event.id),
-								onMouseEnter: () => setHoveredStatus(event.id, true),
-								onMouseLeave: () => setHoveredStatus(event.id, false),
-							}))}
-							width={totalWidth}
-						/>
-					))}
-				</div>
+				<EventsLaneTimeAxis
+					scaleFunc={scaleFunc}
+					totalWidth={timelineTotalWidth}
+					offset={offset}
+					visibleWidth={visibleWidth}
+				/>
+				<EventsLanes
+					categories={categories}
+					events={events}
+					scaleFunc={scaleFunc}
+					selectEvent={selectEvent}
+					setHoveredStatus={setHoveredStatus}
+					totalWidth={totalWidth}
+				/>
 				{
 					selectedEvent ?
 						<SelectionMarker

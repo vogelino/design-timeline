@@ -3069,7 +3069,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^1.0.3:
+hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
@@ -5442,6 +5442,12 @@ react-test-renderer@^15.5.4:
   dependencies:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
+
+react-throttle-props@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-throttle-props/-/react-throttle-props-1.1.0.tgz#519bcc7f8dbd004b8bf5eea2cfa60acaf5b706fa"
+  dependencies:
+    hoist-non-react-statics "^1.2.0"
 
 react@^15.5.4:
   version "15.5.4"
