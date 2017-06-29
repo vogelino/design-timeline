@@ -12,7 +12,7 @@ it('renders without crashing', () => {
 			categories={initialCategories}
 			mainTimeline={{
 				offset: 0,
-				totalWidth: 0,
+				totalWidth: 10000,
 				minDate: new Date(),
 				maxDate: new Date(),
 			}}
@@ -22,6 +22,7 @@ it('renders without crashing', () => {
 				selectEvent: (x) => x,
 				setHoveredStatus: (x) => x,
 			}}
+			ui={{ timelineWidth: 1000 }}
 		/>
 	);
 });

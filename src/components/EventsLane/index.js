@@ -25,17 +25,20 @@ export const EventsLanesComponent = ({
 	categories,
 	actions: { setMouseCoordinates, setHoveredStatus, selectEvent },
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
-	zoom: { start: zoomStart, end: zoomEnd },
+	ui: { timelineWidth },
 }) => {
-	const timelineWidth = totalWidth - (2 * TIMELINE_MARGIN);
-	const scaleFunc = createScaleFunction({ totalWidth: timelineWidth, minDate, maxDate });
+	const timelineTotalWidth = totalWidth - (2 * TIMELINE_MARGIN);
+	const scaleFunc = createScaleFunction({
+		totalWidth: timelineTotalWidth,
+		minDate,
+		maxDate,
+	});
 	const lanes = getLanes({ categories, events, scaleFunc, margin: TIMELINE_MARGIN });
 	const timeLabels = getTimeLabels({
-		totalWidth: timelineWidth,
+		totalWidth: timelineTotalWidth,
 		scaleFunc,
 		offset,
-		zoomStart,
-		zoomEnd,
+		timelineWidth,
 	});
 	const selectedEvent = getSelectedEvent({ categories, events });
 	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);
@@ -56,20 +59,14 @@ export const EventsLanesComponent = ({
 					width: totalWidth,
 				}}
 			>
-				<div
-					className="events-lane_dateaxis"
-					style={{
-						transform: `translateX(-${offset}px)`,
-						width: totalWidth,
-					}}
-				>
-					{timeLabels.map((timeLabel) => (
+				<div className="events-lane_dateaxis">
+					{timeLabels.map(({ text, position, moment }) => (
 						<span
-							key={timeLabel.rawValue}
+							key={moment.year()}
 							className="events-lane_datelabel"
-							style={{ left: timeLabel.position }}
+							style={{ left: position }}
 						>
-							{timeLabel.rawValue}
+							{text}
 						</span>
 					))}
 				</div>
@@ -132,14 +129,13 @@ EventsLanesComponent.propTypes = {
 		minDate: PropTypes.instanceOf(Date).isRequired,
 		maxDate: PropTypes.instanceOf(Date).isRequired,
 	}),
-	zoom: PropTypes.shape({
-		start: PropTypes.number.isRequired,
-		end: PropTypes.number.isRequired,
+	ui: PropTypes.shape({
+		timelineWidth: PropTypes.number.isRequired,
 	}).isRequired,
 };
 
-const mapStateToProps = ({ events, categories, mainTimeline, zoom }) =>
-	({ events, categories, mainTimeline, zoom });
+const mapStateToProps = ({ events, categories, mainTimeline, ui }) =>
+	({ events, categories, mainTimeline, ui });
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators({
 		...mouseActions,
