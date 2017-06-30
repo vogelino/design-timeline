@@ -70,6 +70,10 @@
 .zoom_handler {
 	width: 6px;
 	text-align: center;
+	cursor: col-resize;
+}
+
+.zoom_visiblepart {
 	cursor: grab;
 }
 
@@ -81,11 +85,6 @@
 .zoom_endHandler {
 	right: 0;
 	left: auto;
-}
-
-.zoom_visiblepart {
-	background: red;
-	opacity: .2;
 }
 
 .zoom_startHandler {

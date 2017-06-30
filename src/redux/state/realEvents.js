@@ -731,21 +731,6 @@ const rawEvents = [
 	},
 	{
 		category: 'data-literacy',
-		title: 'Moderner Buchdruck',
-		text: 'Obwohl bereits in der Antike Bücher hergestellt wurden, gilt Johannes Gutenberg als der Erfinder des Buchdruckes. Er revolutionierte die Herstellungstechnik und ist vor allem für den Druck der "Gutenberg-Bibel" bekannt, die in erster Auflage zwischen 150 und 180 mal produziert wurde. Seine Weiterentwicklungen markieren den Beginn des modernen Buchdruckes.',
-		startDate: new Date('1450-12-22T23:06:32.000Z'),
-		type: 'event',
-	},
-	{
-		category: 'data-literacy',
-		title: 'Johannes Gutenberg',
-		text: 'Erfinder des modernen Buchdruckes, geboren und gestorben in Mainz',
-		startDate: new Date('1399-12-23T23:06:32.000Z'),
-		enddatumDesEintragsOptional: '1468-01-24T23:06:32.000Z',
-		type: 'person',
-	},
-	{
-		category: 'data-literacy',
 		title: 'Erster Computer',
 		text: 'Der von Konrad Zuse und Helmut Schreyer gebaute Computer "Zuse Z3" gilt als der erste funktionsfähige Digitalrechner der Welt.',
 		startDate: new Date('1941-05-11T22:00:00.000Z'),
@@ -754,20 +739,6 @@ const rawEvents = [
 			'https://de.wikipedia.org/wiki/Zuse_Z3',
 		],
 		mediaCredits: 'Wikipedia DE, CC-by-sa-3.0',
-	},
-	{
-		category: 'data-literacy',
-		title: 'Erste Universität in Europa',
-		text: 'Die Universität Bologna (Italien) ist die älteste Universität Europas, gegründet 1088. Als älteste Universität der Welt gilt die Universität al-Qarawīyīn (Marokko), gegründet 859.',
-		startDate: new Date('1087-12-25T23:06:32.000Z'),
-		type: 'event',
-	},
-	{
-		category: 'data-literacy',
-		title: 'Erste Universität in Deutschland',
-		text: 'Die älteste Universität Deutschlands (nach den heutigen Grenzbestimmungen) ist die Universität Heidelberg. Sie wurde 1386 gegründet.',
-		startDate: new Date('1385-12-23T23:06:32.000Z'),
-		type: 'event',
 	},
 	{
 		category: 'data-literacy',

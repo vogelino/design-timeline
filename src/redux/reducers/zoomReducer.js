@@ -1,6 +1,6 @@
 import * as types from '../actions/actionTypes';
 
-export const zoomInitialState = { start: 80, end: 90 };
+export const zoomInitialState = { start: 40.948275862068975, end: 57.84482758620696 };
 
 export default (state = zoomInitialState, action = {}) => {
 	switch (action.type) {

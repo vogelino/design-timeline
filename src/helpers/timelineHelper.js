@@ -109,10 +109,11 @@ const getTimelineUnit = (visibleDuration = mandatory('visibleDuration')) => {
 	if (yearAmount / PAIR_YEARS_AMOUNT > UNITS_PER_VIEW) {
 		return createYearUnit(PAIR_YEARS_AMOUNT);
 	}
-	if (yearAmount > UNITS_PER_VIEW) {
-		return createYearUnit(1);
+	const monthAmount = visibleDuration.asMonths();
+	if (monthAmount <= UNITS_PER_VIEW) {
+		return createUnit('month', (m) => m.format('MMM YYYY'))(1);
 	}
-	return createUnit('month', (m) => m.format('MMM YYYY'))(1);
+	return createYearUnit(1);
 };
 
 export const getTimeLabels = ({
