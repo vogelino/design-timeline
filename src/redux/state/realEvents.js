@@ -937,7 +937,7 @@ const rawEvents = [
 		category: 'design-attitude',
 		title: 'Diskussionsrunde zum Thema Design Ethik',
 		text: 'Eine Diskussionsrunde, ausgestrahlt im Radio München, zum Thema Ethik im Design. Zu Gast: die Designerin und Philosophin Manja Unger Büttner, Michael Lanz, Leiter des Instituts Industrial Design in Graz, Stephan Ott vom Designmagazin form und dessen Verleger Peter Wesner, Honorarprofessor für Wirtschaftsethik in Frankfurt.',
-		startDate: new Date('2017-07-26T22:00:00.000Z'),
+		startDate: new Date('2017-06-26T22:00:00.000Z'),
 		type: 'audio',
 		externalLinks: [
 			'http://www.radiomuenchen.net/podcast-archiv/sendeformate/abends-unterwegs/654-design-und-ethik-im-ersten-sommersalon.html',

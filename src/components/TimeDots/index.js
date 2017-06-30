@@ -19,16 +19,36 @@ export const TimeDotsContainerComponent = ({
 
 	const selectedEvent = events.find(({ state: { selected } }) => selected);
 
-	const dots = [{
-		key: 'mousePointer',
-		color: '#0087F2',
-		position: mouseX + offset,
-		tooltipContent: moment(
-			scaleFunc.invert(-TIMELINE_MARGIN + mouseX + offset)
-		).format('LL'),
-		show: true,
-		offset,
-	}];
+	const now = Date.now();
+	const publicationDate = new Date('2017-07-02');
+	const dots = [
+		{
+			key: 'mousePointer',
+			color: '#0087F2',
+			position: mouseX + offset,
+			tooltipContent: moment(
+				scaleFunc.invert(-TIMELINE_MARGIN + mouseX + offset)
+			).format('LL'),
+			show: true,
+			offset,
+		},
+		{
+			key: 'publication',
+			color: '#0087F2',
+			position: scaleFunc(publicationDate) + TIMELINE_MARGIN,
+			tooltipContent: moment(publicationDate).format('LL'),
+			show: true,
+			offset,
+		},
+		{
+			key: 'now',
+			color: '#0087F2',
+			position: scaleFunc(now) + TIMELINE_MARGIN,
+			tooltipContent: moment(now).format('LL'),
+			show: true,
+			offset,
+		},
+	];
 
 	if (selectedEvent) {
 		const selectedEventColor = categories.find(({ slug }) =>
