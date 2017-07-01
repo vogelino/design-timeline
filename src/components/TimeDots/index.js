@@ -25,7 +25,7 @@ export const TimeDotsContainerComponent = ({
 	const selectedEvent = events.find(({ state: { selected } }) => selected);
 
 	const now = Date.now();
-	const publicationDate = new Date('2017-07-02');
+	const publicationDate = new Date('2017-06-28');
 	const dots = [
 		{
 			key: 'publication',

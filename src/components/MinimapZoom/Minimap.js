@@ -26,7 +26,7 @@ export const MinimapComponent = ({
 	);
 	return (
 		<div className="minimap">
-			{getFutureZone(new Date('2017-07-02'), 'publication')}
+			{getFutureZone(new Date('2017-06-28'), 'publication')}
 			{getFutureZone(new Date(), 'future')}
 			{lanes.map(({ laneSlug, laneEvents }) => (
 				<EventsLane
