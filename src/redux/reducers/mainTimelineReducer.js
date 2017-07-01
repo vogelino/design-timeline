@@ -1,7 +1,7 @@
 import * as types from '../actions/actionTypes';
 import { getTimelineZoomOptions } from '../../helpers/timelineHelper';
 
-const initialState = {
+export const mainTimelineInitialState = {
 	mainTimeline: {
 		offset: 0,
 		totalWidth: 0,
@@ -12,7 +12,7 @@ const initialState = {
 	},
 };
 
-export default (state = initialState, action = {}) => {
+export default (state = mainTimelineInitialState, action = {}) => {
 	switch (action.type) {
 	case types.ZOOM_CHANGED:
 	case types.WINDOW_RESIZED:

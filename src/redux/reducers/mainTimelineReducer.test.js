@@ -1,8 +1,8 @@
 /* global it, expect */
-import mainTimelineReducer from './mainTimelineReducer';
+import mainTimelineReducer, { mainTimelineInitialState } from './mainTimelineReducer';
 
 it('should return the initial state when given no params', () => {
-	expect(['offset', 'totalWidth', 'minDate', 'maxDate', 'hovered'])
+	expect(Object.keys(mainTimelineInitialState.mainTimeline))
 		.toMatchObject(Object.keys(mainTimelineReducer()));
 });
 
