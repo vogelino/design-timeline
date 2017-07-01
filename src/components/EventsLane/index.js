@@ -35,6 +35,14 @@ export const EventsLanesComponent = ({
 	});
 	const selectedEvent = getSelectedEvent({ categories, events });
 	const throttleSetMouseCoordinates = throttle(200, setMouseCoordinates);
+	const getFutureZone = (date, classPrefix) => (
+		<div
+			className={`events-lanes_${classPrefix}`}
+			style={{
+				width: totalWidth - scaleFunc(date) - TIMELINE_MARGIN,
+			}}
+		/>
+	);
 	return (
 		<div
 			className="events-lanes"
@@ -54,18 +62,8 @@ export const EventsLanesComponent = ({
 					width: totalWidth,
 				}}
 			>
-				<div
-					className="events-lanes_publication"
-					style={{
-						width: totalWidth - scaleFunc(new Date('2017-07-02')) - TIMELINE_MARGIN,
-					}}
-				/>
-				<div
-					className="events-lanes_future"
-					style={{
-						width: totalWidth - scaleFunc(new Date()) - TIMELINE_MARGIN,
-					}}
-				/>
+				{getFutureZone(new Date('2017-07-02'), 'publication')}
+				{getFutureZone(new Date(), 'future')}
 				<EventsLaneTimeAxis
 					scaleFunc={scaleFunc}
 					totalWidth={timelineTotalWidth}
