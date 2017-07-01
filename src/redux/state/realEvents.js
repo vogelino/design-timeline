@@ -570,7 +570,7 @@ const rawEvents = [
 	},
 	{
 		category: 'design-thinking',
-		title: ' HPI School of Design Thinking at Potsdam',
+		title: 'HPI School of Design Thinking at Potsdam',
 		text: 'Das Potsdamer Hasso-Plattner-Institut für Softwaresystemtechnik mit seiner HPI School of Design Thinking (tätig seit dem Wintersemester 2007/2008) pflegt mit seinem Schwesterinstitut in Stanford eine besonders enge Zusammenarbeit.\n\nNeben dem Austausch von Studenten und Wissenschaftlern gibt es einen jährlich stattfindenden Workshop zum Thema Design Thinking in Deutschland. Ebenso werden über die Achse zwischen Potsdam und Palo Alto deutsche Unternehmen in gemeinsame internationale Entwicklungsprojekte eingebunden. Mit Hilfe moderner Tele-Teaching-Technik wird die Durchführung solcher Projekte auf beiden Seiten des Atlantiks erleichtert. Außerdem gibt es einen Austausch von Lehrinhalten und anderen Materialien.',
 		startDate: new Date('2007-09-30T22:00:00.000Z'),
 		type: 'event',
@@ -1397,7 +1397,7 @@ export default rawEvents.map((data) => ({
 	}, data),
 	id: uuid(),
 	state: {
-		selected: false,
+		selected: data.title === 'HPI School of Design Thinking at Potsdam',
 		hovered: false,
 	},
 }));
