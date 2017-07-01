@@ -8,7 +8,7 @@ import { SIDEBAR_WIDTH } from '../../redux/constants/uiConstants';
 
 const HUNDRED_PERCENT = 100;
 const DRAG_GRID_SIZE = 1;
-const MIN_HANDLERS_SEPARATION = 0.1;
+const MIN_HANDLERS_SEPARATION = 0.9;
 
 const getZoomByDelta = ({
 	delta = 0,

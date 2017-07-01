@@ -14,8 +14,18 @@ export const MinimapComponent = ({
 	const totalWidth = windowWidth - SIDEBAR_WIDTH - (2 * MINIMAP_MARGIN);
 	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
 	const lanes = getLanes({ categories, events, scaleFunc });
+	const getFutureZone = (date, classPrefix) => (
+		<div
+			className={`events-lanes_${classPrefix}`}
+			style={{
+				width: windowWidth - SIDEBAR_WIDTH - scaleFunc(date) - MINIMAP_MARGIN,
+			}}
+		/>
+	);
 	return (
 		<div className="minimap">
+			{getFutureZone(new Date('2017-07-02'), 'publication')}
+			{getFutureZone(new Date(), 'future')}
 			{lanes.map(({ laneSlug, laneEvents }) => (
 				<EventsLane
 					key={laneSlug}

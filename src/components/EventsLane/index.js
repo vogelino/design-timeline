@@ -9,15 +9,8 @@ import * as mainTimelineActions from '../../redux/actions/mainTimelineActions';
 import SelectionMarker from './SelectionMarker';
 import EventsLaneTimeAxis from './EventsLaneTimeAxis';
 import EventsLanes from './EventsLanes';
-import {
-	createScaleFunction,
-	getSelectedEvent,
-} from '../../helpers/timelineHelper';
-import {
-	SIDEBAR_WIDTH,
-	HEADER_HEIGHT,
-	TIMELINE_MARGIN,
-} from '../../redux/constants/uiConstants';
+import { createScaleFunction, getSelectedEvent } from '../../helpers/timelineHelper';
+import { SIDEBAR_WIDTH, HEADER_HEIGHT, TIMELINE_MARGIN } from '../../redux/constants/uiConstants';
 import './EventsLane.css';
 
 export const EventsLanesComponent = ({
