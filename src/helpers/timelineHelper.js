@@ -145,3 +145,43 @@ export const getTimeLabels = ({
 			position: scaleFunc(m.toDate()),
 		}));
 };
+
+const getZoomByDelta = ({
+	delta = 0,
+	percentage = 100,
+	width = 1000,
+}) => {
+	const oldZoomInPixels = (percentage / HUNDRED_PERCENT) * width;
+	const newZoomInPixels = oldZoomInPixels + delta;
+	const newZoomInPercent = (newZoomInPixels * HUNDRED_PERCENT) / width;
+	if (newZoomInPercent < 0) return 0;
+	if (newZoomInPercent > HUNDRED_PERCENT) return HUNDRED_PERCENT;
+	return newZoomInPercent;
+};
+
+export const getNewStartEndFromDelta = ({
+	startPercentage,
+	visiblePercentage,
+	containerWidth,
+}) => (delta) => {
+	let newStartZoomPercentage = getZoomByDelta({
+		delta,
+		percentage: startPercentage,
+		width: containerWidth,
+	});
+	let newEndZoomPercentage = getZoomByDelta({
+		delta,
+		percentage: startPercentage + visiblePercentage,
+		width: containerWidth,
+	});
+	if (newStartZoomPercentage === 0) {
+		newEndZoomPercentage = visiblePercentage;
+	}
+	if (newEndZoomPercentage === HUNDRED_PERCENT) {
+		newStartZoomPercentage = HUNDRED_PERCENT - visiblePercentage;
+	}
+	return {
+		start: newStartZoomPercentage,
+		end: newEndZoomPercentage,
+	};
+};

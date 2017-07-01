@@ -22,8 +22,10 @@ it('renders without crashing', () => {
 				selectEvent: (x) => x,
 				setHoveredStatus: (x) => x,
 				setTimelineHoverStatus: (x) => x,
+				setZoom: (x) => x,
 			}}
 			ui={{ timelineWidth: 1000 }}
+			zoom={{ start: 0, end: 100 }}
 		/>
 	);
 });

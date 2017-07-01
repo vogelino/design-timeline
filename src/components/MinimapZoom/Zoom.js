@@ -5,23 +5,11 @@ import { connect } from 'react-redux';
 import { DraggableCore } from 'react-draggable';
 import * as zoomActions from '../../redux/actions/zoomActions';
 import { SIDEBAR_WIDTH } from '../../redux/constants/uiConstants';
+import { getNewStartEndFromDelta } from '../../helpers/timelineHelper';
 
 const HUNDRED_PERCENT = 100;
 const DRAG_GRID_SIZE = 1;
 const MIN_HANDLERS_SEPARATION = 0.9;
-
-const getZoomByDelta = ({
-	delta = 0,
-	percentage = 100,
-	width = 1000,
-}) => {
-	const oldZoomInPixels = (percentage / HUNDRED_PERCENT) * width;
-	const newZoomInPixels = oldZoomInPixels + delta;
-	const newZoomInPercent = (newZoomInPixels * HUNDRED_PERCENT) / width;
-	if (newZoomInPercent < 0) return 0;
-	if (newZoomInPercent > HUNDRED_PERCENT) return HUNDRED_PERCENT;
-	return newZoomInPercent;
-};
 
 const getWidth = (percentage) => ({
 	width: `${percentage}%`,
@@ -32,107 +20,85 @@ const Zoom = ({
 	endPercentage,
 	zoomWidth,
 	setZoom,
-}) => (
-	<div className="zoom">
-		<div
-			className="zoom_startoffset"
-			style={getWidth(startPercentage)}
-		/>
-		<div
-			className="zoom_endoffset"
-			style={getWidth(endPercentage)}
-		/>
-		<DraggableCore
-			grid={[DRAG_GRID_SIZE, 0]}
-			onDrag={(evt, { deltaX: delta }) => {
-				let newStartZoomPercentage = getZoomByDelta({
-					delta,
-					percentage: startPercentage,
-					width: zoomWidth,
-				});
-				let newEndZoomPercentage = getZoomByDelta({
-					delta,
-					percentage: startPercentage + visiblePercentage,
-					width: zoomWidth,
-				});
-				if (newStartZoomPercentage === 0) {
-					newEndZoomPercentage = visiblePercentage;
-				}
-				if (newEndZoomPercentage === HUNDRED_PERCENT) {
-					newStartZoomPercentage = HUNDRED_PERCENT - visiblePercentage;
-				}
-				setZoom({
-					start: newStartZoomPercentage,
-					end: newEndZoomPercentage,
-				});
-			}}
-		>
+}) => {
+	const getNewZoom = getNewStartEndFromDelta({
+		startPercentage,
+		visiblePercentage,
+		containerWidth: zoomWidth,
+	});
+	return (
+		<div className="zoom">
 			<div
-				className="zoom_visiblepart"
-				style={{
-					...getWidth(visiblePercentage),
-					left: `${startPercentage}%`,
-				}}
+				className="zoom_startoffset"
+				style={getWidth(startPercentage)}
 			/>
-		</DraggableCore>
-		<DraggableCore
-			grid={[DRAG_GRID_SIZE, 0]}
-			onDrag={(evt, { deltaX: delta }) => {
-				const newStartZoomPercentage = getZoomByDelta({
-					delta,
-					percentage: startPercentage,
-					width: zoomWidth,
-				});
-				const endZoomPercentage = (startPercentage + visiblePercentage)
-					- MIN_HANDLERS_SEPARATION;
-				setZoom({
-					start: newStartZoomPercentage > endZoomPercentage ?
-						endZoomPercentage : newStartZoomPercentage,
-				});
-			}}
-		>
 			<div
-				className="zoom_startHandler zoom_handler"
-				style={{ left: `${startPercentage}%` }}
+				className="zoom_endoffset"
+				style={getWidth(endPercentage)}
+			/>
+			<DraggableCore
+				grid={[DRAG_GRID_SIZE, 0]}
+				onDrag={(evt, { deltaX: delta }) => setZoom(getNewZoom(delta))}
 			>
-				<div className="zoom_handlerwrapper">
-					<span className="zoom_handlerbar" />
-					<span className="zoom_handlergrabber" />
-					<span className="zoom_handlerdate" />
-				</div>
-			</div>
-		</DraggableCore>
-		<DraggableCore
-			grid={[DRAG_GRID_SIZE, 0]}
-			onDrag={(evt, { deltaX: delta }) => {
-				const newEndZoomPercentage = getZoomByDelta({
-					delta,
-					percentage: startPercentage + visiblePercentage,
-					width: zoomWidth,
-				});
-				const startZoomPercentage = (
-					startPercentage +
-					MIN_HANDLERS_SEPARATION
-				);
-				setZoom({
-					end: newEndZoomPercentage < startZoomPercentage ?
-						startZoomPercentage : newEndZoomPercentage,
-				});
-			}}
-		>
-			<div
-				className="zoom_endHandler zoom_handler"
-				style={{ right: `${endPercentage}%` }}
+				<div
+					className="zoom_visiblepart"
+					style={{
+						...getWidth(visiblePercentage),
+						left: `${startPercentage}%`,
+					}}
+				/>
+			</DraggableCore>
+			<DraggableCore
+				grid={[DRAG_GRID_SIZE, 0]}
+				onDrag={(evt, { deltaX: delta }) => {
+					const { start } = getNewZoom(delta);
+					const endZoomPercentage = (startPercentage + visiblePercentage)
+						- MIN_HANDLERS_SEPARATION;
+					setZoom({
+						start: start > endZoomPercentage ?
+							endZoomPercentage : start,
+					});
+				}}
 			>
-				<div className="zoom_handlerwrapper">
-					<span className="zoom_handlerbar" />
-					<span className="zoom_handlergrabber" />
-					<span className="zoom_handlerdate" />
+				<div
+					className="zoom_startHandler zoom_handler"
+					style={{ left: `${startPercentage}%` }}
+				>
+					<div className="zoom_handlerwrapper">
+						<span className="zoom_handlerbar" />
+						<span className="zoom_handlergrabber" />
+						<span className="zoom_handlerdate" />
+					</div>
 				</div>
-			</div>
-		</DraggableCore>
-	</div>
-);
+			</DraggableCore>
+			<DraggableCore
+				grid={[DRAG_GRID_SIZE, 0]}
+				onDrag={(evt, { deltaX: delta }) => {
+					const { end } = getNewZoom(delta);
+					const startZoomPercentage = (
+						startPercentage +
+						MIN_HANDLERS_SEPARATION
+					);
+					setZoom({
+						end: end < startZoomPercentage ?
+							startZoomPercentage : end,
+					});
+				}}
+			>
+				<div
+					className="zoom_endHandler zoom_handler"
+					style={{ right: `${endPercentage}%` }}
+				>
+					<div className="zoom_handlerwrapper">
+						<span className="zoom_handlerbar" />
+						<span className="zoom_handlergrabber" />
+						<span className="zoom_handlerdate" />
+					</div>
+				</div>
+			</DraggableCore>
+		</div>
+	);
+};
 
 Zoom.defaultProps = {
 	visiblePercentage: 100,

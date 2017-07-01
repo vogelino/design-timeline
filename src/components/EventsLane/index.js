@@ -3,22 +3,32 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import throttle from 'throttle-debounce/throttle';
+import { DraggableCore } from 'react-draggable';
 import * as mouseActions from '../../redux/actions/mouseActions';
 import * as eventsActions from '../../redux/actions/eventsActions';
 import * as mainTimelineActions from '../../redux/actions/mainTimelineActions';
+import * as zoomActions from '../../redux/actions/zoomActions';
 import SelectionMarker from './SelectionMarker';
 import EventsLaneTimeAxis from './EventsLaneTimeAxis';
 import EventsLanes from './EventsLanes';
-import { createScaleFunction, getSelectedEvent } from '../../helpers/timelineHelper';
+import { createScaleFunction, getSelectedEvent, getNewStartEndFromDelta } from '../../helpers/timelineHelper';
 import { SIDEBAR_WIDTH, HEADER_HEIGHT, TIMELINE_MARGIN } from '../../redux/constants/uiConstants';
 import './EventsLane.css';
 
+const DRAG_GRID_SIZE = 1;
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	actions: { setMouseCoordinates, setHoveredStatus, selectEvent, setTimelineHoverStatus },
+	actions: {
+		setMouseCoordinates,
+		setHoveredStatus,
+		selectEvent,
+		setTimelineHoverStatus,
+		setZoom,
+	},
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 	ui: { timelineWidth: visibleWidth },
+	zoom: { start: startPercentage, end: endPercentage },
 }) => {
 	const timelineTotalWidth = totalWidth - (2 * TIMELINE_MARGIN);
 	const scaleFunc = createScaleFunction({
@@ -48,38 +58,50 @@ export const EventsLanesComponent = ({
 				})
 			}
 		>
-			<div
-				className="events-lanes_wrapper"
-				style={{
-					transform: `translateX(-${offset}px)`,
-					width: totalWidth,
+			<DraggableCore
+				grid={[DRAG_GRID_SIZE, 0]}
+				onDrag={(evt, { deltaX }) => {
+					const getNewZoom = getNewStartEndFromDelta({
+						startPercentage,
+						visiblePercentage: endPercentage - startPercentage,
+						containerWidth: timelineTotalWidth,
+					});
+					setZoom(getNewZoom(deltaX * -1));
 				}}
 			>
-				{getFutureZone(new Date('2017-07-02'), 'publication')}
-				{getFutureZone(new Date(), 'future')}
-				<EventsLaneTimeAxis
-					scaleFunc={scaleFunc}
-					totalWidth={timelineTotalWidth}
-					offset={offset}
-					visibleWidth={visibleWidth}
-				/>
-				<EventsLanes
-					categories={categories}
-					events={events}
-					scaleFunc={scaleFunc}
-					selectEvent={selectEvent}
-					setHoveredStatus={setHoveredStatus}
-					totalWidth={totalWidth}
-				/>
-				{
-					selectedEvent ?
-						<SelectionMarker
-							date={selectedEvent.data.startDate}
-							color={selectedEvent.color}
-							scaleFunc={scaleFunc}
-						/> : null
-				}
-			</div>
+				<div
+					className="events-lanes_wrapper"
+					style={{
+						transform: `translateX(-${offset}px)`,
+						width: totalWidth,
+					}}
+				>
+					{getFutureZone(new Date('2017-07-02'), 'publication')}
+					{getFutureZone(new Date(), 'future')}
+					<EventsLaneTimeAxis
+						scaleFunc={scaleFunc}
+						totalWidth={timelineTotalWidth}
+						offset={offset}
+						visibleWidth={visibleWidth}
+					/>
+					<EventsLanes
+						categories={categories}
+						events={events}
+						scaleFunc={scaleFunc}
+						selectEvent={selectEvent}
+						setHoveredStatus={setHoveredStatus}
+						totalWidth={totalWidth}
+					/>
+					{
+						selectedEvent ?
+							<SelectionMarker
+								date={selectedEvent.data.startDate}
+								color={selectedEvent.color}
+								scaleFunc={scaleFunc}
+							/> : null
+					}
+				</div>
+			</DraggableCore>
 		</div>
 	);
 };
@@ -109,6 +131,7 @@ EventsLanesComponent.propTypes = {
 		selectEvent: PropTypes.func.isRequired,
 		setHoveredStatus: PropTypes.func.isRequired,
 		setTimelineHoverStatus: PropTypes.func.isRequired,
+		setZoom: PropTypes.func.isRequired,
 	}).isRequired,
 	mainTimeline: PropTypes.shape({
 		offset: PropTypes.number.isRequired,
@@ -119,15 +142,20 @@ EventsLanesComponent.propTypes = {
 	ui: PropTypes.shape({
 		timelineWidth: PropTypes.number.isRequired,
 	}).isRequired,
+	zoom: PropTypes.shape({
+		start: PropTypes.number.isRequired,
+		end: PropTypes.number.isRequired,
+	}).isRequired,
 };
 
-const mapStateToProps = ({ events, categories, mainTimeline, ui }) =>
-	({ events, categories, mainTimeline, ui });
+const mapStateToProps = ({ events, categories, mainTimeline, ui, zoom }) =>
+	({ events, categories, mainTimeline, ui, zoom });
 const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators({
 		...mouseActions,
 		...eventsActions,
 		...mainTimelineActions,
+		...zoomActions,
 	}, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EventsLanesComponent);
