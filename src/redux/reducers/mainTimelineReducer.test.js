@@ -2,7 +2,7 @@
 import mainTimelineReducer from './mainTimelineReducer';
 
 it('should return the initial state when given no params', () => {
-	expect(['offset', 'totalWidth', 'minDate', 'maxDate'])
+	expect(['offset', 'totalWidth', 'minDate', 'maxDate', 'hovered'])
 		.toMatchObject(Object.keys(mainTimelineReducer()));
 });
 

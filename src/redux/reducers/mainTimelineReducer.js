@@ -7,6 +7,7 @@ const initialState = {
 		totalWidth: 0,
 		minDate: new Date(),
 		maxDate: new Date(),
+		hovered: false,
 	},
 };
 
@@ -18,14 +19,22 @@ export default (state = initialState, action = {}) => {
 			const eventsByDate = state.events.sort((evt1, evt2) =>
 				evt1.data.startDate.valueOf() - evt2.data.startDate.valueOf()
 			);
-			return getTimelineZoomOptions({
-				zoomStart: state.zoom.start,
-				zoomEnd: state.zoom.end,
-				minDate: eventsByDate[0].data.startDate,
-				maxDate: eventsByDate[eventsByDate.length - 1].data.startDate,
-				width: state.ui.timelineWidth,
-			});
+			return {
+				...state.mainTimeline,
+				...getTimelineZoomOptions({
+					zoomStart: state.zoom.start,
+					zoomEnd: state.zoom.end,
+					minDate: eventsByDate[0].data.startDate,
+					maxDate: eventsByDate[eventsByDate.length - 1].data.startDate,
+					width: state.ui.timelineWidth,
+				}),
+			};
 		})();
+	case types.TIMELINE_HOVERSTATUS_CHANGED:
+		return {
+			...state.mainTimeline,
+			hovered: action.payload,
+		};
 	default: return state.mainTimeline;
 	}
 };

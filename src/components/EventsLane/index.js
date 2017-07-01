@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import throttle from 'throttle-debounce/throttle';
 import * as mouseActions from '../../redux/actions/mouseActions';
 import * as eventsActions from '../../redux/actions/eventsActions';
+import * as mainTimelineActions from '../../redux/actions/mainTimelineActions';
 import SelectionMarker from './SelectionMarker';
 import EventsLaneTimeAxis from './EventsLaneTimeAxis';
 import EventsLanes from './EventsLanes';
@@ -22,7 +23,7 @@ import './EventsLane.css';
 export const EventsLanesComponent = ({
 	events,
 	categories,
-	actions: { setMouseCoordinates, setHoveredStatus, selectEvent },
+	actions: { setMouseCoordinates, setHoveredStatus, selectEvent, setTimelineHoverStatus },
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 	ui: { timelineWidth: visibleWidth },
 }) => {
@@ -37,6 +38,8 @@ export const EventsLanesComponent = ({
 	return (
 		<div
 			className="events-lanes"
+			onMouseEnter={() => setTimelineHoverStatus(true)}
+			onMouseLeave={() => setTimelineHoverStatus(false)}
 			onMouseMove={({ clientX, clientY }) =>
 				throttleSetMouseCoordinates({
 					mouseX: clientX - SIDEBAR_WIDTH,
@@ -102,6 +105,7 @@ EventsLanesComponent.propTypes = {
 		setMouseCoordinates: PropTypes.func.isRequired,
 		selectEvent: PropTypes.func.isRequired,
 		setHoveredStatus: PropTypes.func.isRequired,
+		setTimelineHoverStatus: PropTypes.func.isRequired,
 	}).isRequired,
 	mainTimeline: PropTypes.shape({
 		offset: PropTypes.number.isRequired,
@@ -120,6 +124,7 @@ const mapDispatchToProps = (dispatch) => ({
 	actions: bindActionCreators({
 		...mouseActions,
 		...eventsActions,
+		...mainTimelineActions,
 	}, dispatch),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EventsLanesComponent);

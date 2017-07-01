@@ -21,6 +21,7 @@ it('renders without crashing', () => {
 				setMouseCoordinates: (x) => x,
 				selectEvent: (x) => x,
 				setHoveredStatus: (x) => x,
+				setTimelineHoverStatus: (x) => x,
 			}}
 			ui={{ timelineWidth: 1000 }}
 		/>
