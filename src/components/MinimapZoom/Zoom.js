@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { DraggableCore } from 'react-draggable';
 import * as zoomActions from '../../redux/actions/zoomActions';
+import * as mainTimelineActions from '../../redux/actions/mainTimelineActions';
 import { SIDEBAR_WIDTH } from '../../redux/constants/uiConstants';
 import { getNewStartEndFromDelta } from '../../helpers/timelineHelper';
 
@@ -20,12 +20,19 @@ const Zoom = ({
 	endPercentage,
 	zoomWidth,
 	setZoom,
+	startDragging: onStart,
+	stopDragging: onStop,
 }) => {
 	const getNewZoom = getNewStartEndFromDelta({
 		startPercentage,
 		visiblePercentage,
 		containerWidth: zoomWidth,
 	});
+	const draggableCommonProps = {
+		grid: [DRAG_GRID_SIZE, 0],
+		onStart,
+		onStop,
+	};
 	return (
 		<div className="zoom">
 			<div
@@ -37,7 +44,7 @@ const Zoom = ({
 				style={getWidth(endPercentage)}
 			/>
 			<DraggableCore
-				grid={[DRAG_GRID_SIZE, 0]}
+				{...draggableCommonProps}
 				onDrag={(evt, { deltaX: delta }) => setZoom(getNewZoom(delta))}
 			>
 				<div
@@ -49,7 +56,7 @@ const Zoom = ({
 				/>
 			</DraggableCore>
 			<DraggableCore
-				grid={[DRAG_GRID_SIZE, 0]}
+				{...draggableCommonProps}
 				onDrag={(evt, { deltaX: delta }) => {
 					const { start } = getNewZoom(delta);
 					const endZoomPercentage = (startPercentage + visiblePercentage)
@@ -72,7 +79,7 @@ const Zoom = ({
 				</div>
 			</DraggableCore>
 			<DraggableCore
-				grid={[DRAG_GRID_SIZE, 0]}
+				{...draggableCommonProps}
 				onDrag={(evt, { deltaX: delta }) => {
 					const { end } = getNewZoom(delta);
 					const startZoomPercentage = (
@@ -106,6 +113,8 @@ Zoom.defaultProps = {
 	endPercentage: 0,
 	zoomWidth: 1000,
 	setZoom: (x) => x,
+	startDragging: (x) => x,
+	stopDragging: (x) => x,
 };
 
 Zoom.propTypes = {
@@ -114,6 +123,8 @@ Zoom.propTypes = {
 	endPercentage: PropTypes.number,
 	zoomWidth: PropTypes.number,
 	setZoom: PropTypes.func,
+	startDragging: PropTypes.func,
+	stopDragging: PropTypes.func,
 };
 
 const mapStateToProps = ({
@@ -126,7 +137,9 @@ const mapStateToProps = ({
 	zoomWidth: windowWidth - SIDEBAR_WIDTH,
 });
 const mapDispatchToProps = (dispatch) => ({
-	setZoom: bindActionCreators(zoomActions, dispatch).setZoom,
+	setZoom: (zoom) => dispatch(zoomActions.setZoom(zoom)),
+	startDragging: () => dispatch(mainTimelineActions.startDragging()),
+	stopDragging: () => dispatch(mainTimelineActions.stopDragging()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Zoom);
