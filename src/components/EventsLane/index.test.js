@@ -23,6 +23,8 @@ it('renders without crashing', () => {
 				setHoveredStatus: (x) => x,
 				setTimelineHoverStatus: (x) => x,
 				setZoom: (x) => x,
+				startDragging: (x) => x,
+				stopDragging: (x) => x,
 			}}
 			ui={{ timelineWidth: 1000 }}
 			zoom={{ start: 0, end: 100 }}

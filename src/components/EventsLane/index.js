@@ -25,6 +25,8 @@ export const EventsLanesComponent = ({
 		selectEvent,
 		setTimelineHoverStatus,
 		setZoom,
+		startDragging,
+		stopDragging,
 	},
 	mainTimeline: { offset, totalWidth, minDate, maxDate },
 	ui: { timelineWidth: visibleWidth },
@@ -60,6 +62,8 @@ export const EventsLanesComponent = ({
 		>
 			<DraggableCore
 				grid={[DRAG_GRID_SIZE, 0]}
+				onStart={startDragging}
+				onStop={stopDragging}
 				onDrag={(evt, { deltaX }) => {
 					const getNewZoom = getNewStartEndFromDelta({
 						startPercentage,
@@ -132,6 +136,8 @@ EventsLanesComponent.propTypes = {
 		setHoveredStatus: PropTypes.func.isRequired,
 		setTimelineHoverStatus: PropTypes.func.isRequired,
 		setZoom: PropTypes.func.isRequired,
+		startDragging: PropTypes.func.isRequired,
+		stopDragging: PropTypes.func.isRequired,
 	}).isRequired,
 	mainTimeline: PropTypes.shape({
 		offset: PropTypes.number.isRequired,

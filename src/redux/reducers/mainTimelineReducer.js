@@ -8,6 +8,7 @@ const initialState = {
 		minDate: new Date(),
 		maxDate: new Date(),
 		hovered: false,
+		dragging: false,
 	},
 };
 
@@ -35,6 +36,10 @@ export default (state = initialState, action = {}) => {
 			...state.mainTimeline,
 			hovered: action.payload,
 		};
+	case types.TIMELINE_DRAG_STARTED:
+		return { ...state.mainTimeline, dragging: true };
+	case types.TIMELINE_DRAG_STOPPED:
+		return { ...state.mainTimeline, dragging: false };
 	default: return state.mainTimeline;
 	}
 };

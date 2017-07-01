@@ -12,8 +12,9 @@ export const TimeDotsContainerComponent = ({
 	events,
 	categories,
 	mouseX,
-	mainTimeline: { offset, totalWidth, minDate, maxDate, hovered },
+	mainTimeline: { offset, totalWidth, minDate, maxDate, hovered, dragging },
 }) => {
+	if (dragging) return null;
 	const timelineTotalWidth = totalWidth - (2 * TIMELINE_MARGIN);
 	const scaleFunc = createScaleFunction({
 		totalWidth: timelineTotalWidth,
