@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createScaleFunction, getLanes } from '../../helpers/timelineHelper';
-import { SIDEBAR_WIDTH, MINIMAP_MARGIN } from '../../redux/constants/uiConstants';
+import { SIDEBAR_WIDTH, TOPICS_LIST_WIDTH, MINIMAP_MARGIN } from '../../redux/constants/uiConstants';
 import EventsLane from '../EventsLane/EventsLane';
 
 export const MinimapComponent = ({
@@ -11,14 +11,16 @@ export const MinimapComponent = ({
 	ui: { windowWidth },
 	mainTimeline: { minDate, maxDate },
 }) => {
-	const totalWidth = windowWidth - SIDEBAR_WIDTH - (2 * MINIMAP_MARGIN);
+	const totalWidth = windowWidth - SIDEBAR_WIDTH -
+		TOPICS_LIST_WIDTH - (2 * MINIMAP_MARGIN);
 	const scaleFunc = createScaleFunction({ totalWidth, minDate, maxDate });
 	const lanes = getLanes({ categories, events, scaleFunc });
 	const getFutureZone = (date, classPrefix) => (
 		<div
 			className={`events-lanes_${classPrefix}`}
 			style={{
-				width: windowWidth - SIDEBAR_WIDTH - scaleFunc(date) - MINIMAP_MARGIN,
+				width: windowWidth - SIDEBAR_WIDTH - scaleFunc(date) -
+					TOPICS_LIST_WIDTH - MINIMAP_MARGIN,
 			}}
 		/>
 	);

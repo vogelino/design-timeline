@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { DraggableCore } from 'react-draggable';
 import * as zoomActions from '../../redux/actions/zoomActions';
 import * as mainTimelineActions from '../../redux/actions/mainTimelineActions';
-import { SIDEBAR_WIDTH } from '../../redux/constants/uiConstants';
+import { SIDEBAR_WIDTH, TOPICS_LIST_WIDTH } from '../../redux/constants/uiConstants';
 import { getNewStartEndFromDelta } from '../../helpers/timelineHelper';
 
 const HUNDRED_PERCENT = 100;
@@ -134,7 +134,7 @@ const mapStateToProps = ({
 	visiblePercentage: end - start,
 	startPercentage: start,
 	endPercentage: HUNDRED_PERCENT - end,
-	zoomWidth: windowWidth - SIDEBAR_WIDTH,
+	zoomWidth: windowWidth - SIDEBAR_WIDTH - TOPICS_LIST_WIDTH,
 });
 const mapDispatchToProps = (dispatch) => ({
 	setZoom: (zoom) => dispatch(zoomActions.setZoom(zoom)),
