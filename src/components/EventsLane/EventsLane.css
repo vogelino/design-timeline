@@ -132,3 +132,16 @@
 	height: 100%;
 	width: 1px;
 }
+
+.events-lanes_publication,
+.events-lanes_future {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: #003c6c;
+}
+
+.events-lanes_publication {
+	background: #005FB2;
+}
