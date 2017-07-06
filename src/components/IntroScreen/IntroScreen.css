@@ -112,7 +112,7 @@ body {
 	width: 130px;
 	height: 130px;
 
-	border: 3px solid blue;
+	border: 3px solid #F0BB54;
 
 	-webkit-transform: scale(0.6);
 	-moz-transform: scale(0.6);
@@ -131,7 +131,7 @@ body {
 	width: 110px;
 	height: 110px;
 
-	border: 3px solid hotpink;
+	border: 3px solid #E966AC;
 
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);
@@ -150,7 +150,7 @@ body {
 	width: 90px;
 	height: 90px;
 
-	border: 3px solid green;
+	border: 3px solid #33A7D8;
 
 	-webkit-transform: scale(0.75);
 	-moz-transform: scale(0.75);
@@ -169,7 +169,7 @@ body {
 	width: 70px;
 	height: 70px;
 
-	border: 3px solid orange;
+	border: 3px solid #8869AD;
 
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);
@@ -276,16 +276,16 @@ body {
 	background-color: #33B8A5;
 }
 .n2:active {
-	background-color: blue;
+	background-color: #F0BB54;
 }
 .n3:active {
-	background-color: hotpink;
+	background-color: #E966AC;
 }
 .n4:active {
-	background-color: green;
+	background-color: #33A7D8;
 }
 .n5:active {
-	background-color: orange;
+	background-color: #8869AD;
 }
 
 
@@ -304,13 +304,13 @@ body {
 	left: -120%;
 	width: 6400px;
 	height: 396px;
-	animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+	animation: wave 15s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
 	transform: translate3d(0, 0, 0);
 }
 
 .wave:nth-of-type(2) {
 	top: 108%;
-	animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
+	animation: wave 15s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 15s ease -1.25s infinite;
 	opacity: 1;
 }
 
