@@ -59,12 +59,6 @@ export const initialCategories = [
 		slug: 'design-niche',
 		color: '#d35400',
 	},
-	{
-		title: 'Privacy',
-		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper, dui et vestibulum auctor, lacus elit aliquam tortor, at euismod ex diam tempus diam. Vestibulum dapibus massa sed lorem fermentum, ac facilisis nulla aliquam. Sed aliquet posuere ex nec porta. Aliquam tristique, odio vitae sagittis scelerisque, lacus felis tincidunt purus, eget iaculis velit ex sed turpis. Nullam at mi enim. Etiam congue dignissim dolor, porta aliquam felis sollicitudin sit amet. Duis at gravida velit, sit amet gravida dui.',
-		slug: 'privacy-monitoring-tracking',
-		color: '#95a5a6',
-	},
 ];
 
 export default (categories = initialCategories) => categories;
