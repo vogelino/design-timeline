@@ -11,15 +11,15 @@ class IntroBubbles extends Component {
 		return false;
 	}
 	render() {
-		const { colors, windowWidth, windowHeight } = this.props;
+		const { colors } = this.props;
 		const bubbles = Array.from(Array(20)).map((val, id) => {
 			const diameter = getRandomInt(100, 2);
 			return {
 				id,
 				diameter,
 				color: colors[getRandomInt(colors.length, 0)],
-				xPosition: getRandomInt((windowWidth + (diameter / 2)), 0),
-				yPosition: getRandomInt((windowHeight + (diameter / 2)), 0),
+				xPosition: getRandomInt(100, 0),
+				yPosition: getRandomInt(100, 0),
 			};
 		});
 		return (
@@ -27,15 +27,23 @@ class IntroBubbles extends Component {
 				{bubbles.map((bubble) => (
 					<div
 						key={bubble.id}
-						className="introbubbles_bubble"
+						className="introbubbles_bubblewrapper"
 						style={{
 							width: bubble.diameter,
 							height: bubble.diameter,
-							borderColor: bubble.color,
-							left: bubble.xPosition,
-							top: bubble.yPosition,
+							left: `${bubble.xPosition}%`,
+							top: `${bubble.yPosition}%`,
 						}}
-					/>
+					>
+						<span
+							className="introbubbles_bubble"
+							style={{
+								width: bubble.diameter,
+								height: bubble.diameter,
+								borderColor: bubble.color,
+							}}
+						/>
+					</div>
 				))}
 			</div>
 		);
@@ -44,19 +52,13 @@ class IntroBubbles extends Component {
 
 IntroBubbles.defaultProps = {
 	colors: [],
-	windowHeight: 800,
-	windowWidth: 1200,
 };
 
 IntroBubbles.propTypes = {
 	colors: PropTypes.array,
-	windowHeight: PropTypes.number,
-	windowWidth: PropTypes.number,
 };
 
-const mapStateToProps = ({ categories, ui: { windowWidth, windowHeight } }) => ({
+const mapStateToProps = ({ categories }) => ({
 	colors: categories.map(({ color }) => color),
-	windowWidth,
-	windowHeight,
 });
 export default connect(mapStateToProps)(IntroBubbles);
