@@ -1,0 +1,39 @@
+.scrollarea-content {
+	padding: 0 20px 0;
+	box-sizing: border-box;
+}
+
+.scrollarea .scrollbar-container {
+	cursor: grab;
+}
+
+.scrollarea .scrollbar-container .scrollbar {
+	border-radius: 1px;
+}
+
+.scrollarea .scrollbar-container:active {
+	cursor: grabbing;
+}
+
+.scrollarea .scrollbar-container.horizontal {
+	height: 8px;
+}
+
+.scrollarea .scrollbar-container.horizontal .scrollbar {
+	background: #0087F2;
+	margin-top: 0;
+}
+
+.scrollarea .scrollbar-container.vertical {
+	width: 8px;
+}
+
+.scrollarea .scrollbar-container.vertical .scrollbar {
+	background: #0087F2;
+	margin-left: 0px;
+}
+
+.scrollarea .scrollbar-container.active,
+.scrollarea .scrollbar-container:hover {
+	background: none;
+}

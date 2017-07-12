@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
+import ScrollArea from '../ScrollArea';
 import { combineCssClasses } from '../../helpers/styleHelper';
 import './IntroScreen.css';
 
@@ -15,10 +16,9 @@ export const IntroScreenComponent = ({ visible, text, title, buttonText }) => (
 	>
 		<div className="introscreen_content">
 			<div className="introscreen_start-title">{title}</div>
-			<ReactMarkdown
-				className="introscreen_start-text"
-				source={text}
-			/>
+			<ScrollArea className="introscreen_start-text">
+				<ReactMarkdown source={text} />
+			</ScrollArea>
 			<button className="introscreen_start-button">{buttonText}</button>
 		</div>
 		<div className="introscreen_ocean">
