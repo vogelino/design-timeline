@@ -1,3 +1,5 @@
+import * as types from '../actions/actionTypes';
+
 const introScreenInitialState = {
 	visible: true,
 	title: 'Getting a Design Job in 2030',
@@ -5,4 +7,12 @@ const introScreenInitialState = {
 	buttonText: 'Bring mir zur Visualisierung',
 };
 
-export default (state = introScreenInitialState) => state;
+export default (
+	state = introScreenInitialState,
+	action = { payload: false },
+) => (
+	action.type === types.INTRO_SCREEN_VISIBILITY_CHANGED ? ({
+		...state,
+		visible: action.payload,
+	}) : state
+);

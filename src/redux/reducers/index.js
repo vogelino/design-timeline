@@ -15,7 +15,7 @@ const rootReducer = (state = {}, action = {}) => {
 		mouse: mouse(state.mouse, action),
 		ui: uiState,
 		mainTimeline: state.mainTimeline,
-		introScreen: introScreen(state.introScreen, action)
+		introScreen: introScreen(state.introScreen, action),
 	};
 	return {
 		...newState,
