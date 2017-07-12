@@ -114,7 +114,7 @@
 	height: 100%;
 	position: relative;
 	margin-left: -1px;
-	animation: wave 15s cubic-bezier(.36, .45, .63, .53) infinite;
+	animation: wave 35s cubic-bezier(.36, .45, .63, .53) infinite;
 }
 
 @keyframes wave {
