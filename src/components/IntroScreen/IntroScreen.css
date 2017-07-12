@@ -28,7 +28,7 @@
 	left: 50%;
 	width: 470px;
 	transform: translateX(-50%);
-	z-index: 2;
+	z-index: 3;
 }
 
 .introscreen_content li,

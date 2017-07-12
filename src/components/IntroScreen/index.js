@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import ScrollArea from '../ScrollArea';
 import { combineCssClasses } from '../../helpers/styleHelper';
 import * as introScreenActions from '../../redux/actions/introScreenActions';
+import IntroBubbles from './IntroBubbles';
 import './IntroScreen.css';
 
 export const IntroScreenComponent = ({
@@ -37,6 +38,7 @@ export const IntroScreenComponent = ({
 		<div className="introscreen_ocean">
 			<div className="introscreen_wave" />
 		</div>
+		<IntroBubbles />
 	</div>
 );
 
