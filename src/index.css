@@ -4,6 +4,7 @@ body {
 	font-family: 'Replica', sans-serif;
 	color: #003C6C;
 	-webkit-font-smoothing: antialiased;
+	overflow: hidden;
 }
 
 a {
