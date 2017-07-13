@@ -154,7 +154,7 @@ const rawEvents = [
 		text: 'Giles Colborne about designers\' skills in the context of AI.',
 		startDate: new Date('2016-03-31T22:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://vimeo.com/161177402',
+		video: 'https://vimeo.com/161177402',
 	},
 	{
 		category: 'artificial-intelligence-deep-learning-machine-learning',
@@ -266,7 +266,7 @@ const rawEvents = [
 		title: '"The end of privacy"',
 		startDate: new Date('2017-03-24T23:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://www.youtube.com/watch?v=DYhAM34Hhzc',
+		video: 'https://www.youtube.com/watch?v=DYhAM34Hhzc',
 	},
 	{
 		category: 'big-data',
@@ -584,7 +584,7 @@ const rawEvents = [
 		title: 'Interview mit der Design-Thinking-Ikone David Kelley',
 		startDate: new Date('2010-10-26T22:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://www.youtube.com/watch?v=cSMZ3ioQ7rc',
+		video: 'https://www.youtube.com/watch?v=cSMZ3ioQ7rc',
 	},
 	{
 		category: 'design-thinking',
@@ -595,7 +595,7 @@ const rawEvents = [
 		externalLinks: [
 			'http://www.designthinkingmovie.com/',
 		],
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://www.youtube.com/watch?v=uilcaXYnluU&feature=youtu.be',
+		video: 'https://www.youtube.com/watch?v=uilcaXYnluU&feature=youtu.be',
 	},
 	{
 		category: 'design-thinking',
@@ -647,7 +647,7 @@ const rawEvents = [
 		text: 'Robyn behandelt den Unterricht wie ein musikalischer Auftritt.  Design Thinking unterrichten auf ihre eigene Weise durch die Wiederentdeckung der verlorenen Medien. Sie ermutigt Menschen sich in frage zu stellen was sie glaube zu wissen.',
 		startDate: new Date('2014-06-10T22:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://youtu.be/TPXrheqhTCs?list=PLdiAgEgVHpPdQbyT7-MYWpInInjoXsbmN',
+		video: 'https://youtu.be/TPXrheqhTCs?list=PLdiAgEgVHpPdQbyT7-MYWpInInjoXsbmN',
 	},
 	{
 		category: 'design-thinking',
@@ -655,7 +655,7 @@ const rawEvents = [
 		text: 'Suresh Jayakar erzählt wie er als User Experience Designer ist es seine Aufgabe, mit Leuten zu sprechen, die Probleme zu hören, die sie haben, und die Technologie nutzen, um diese Probleme zu lösen mit der Verwendung von Design Thinking Methoden .',
 		startDate: new Date('2017-01-16T23:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://www.youtube.com/watch?v=UQYoWwHg3qA',
+		video: 'https://www.youtube.com/watch?v=UQYoWwHg3qA',
 	},
 	{
 		category: 'design-thinking',
@@ -674,9 +674,7 @@ const rawEvents = [
 		startDate: new Date('2030-06-04T22:00:00.000Z'),
 		type: 'text',
 		future: 'extreme',
-		externalLinks: [
-			'https://jscfeatures.jsc.nasa.gov/jscfeatures/images/hires/jsc2004e45077-AsCanAnniv.jpg',
-		],
+		titleImage: 'https://jscfeatures.jsc.nasa.gov/jscfeatures/images/hires/jsc2004e45077-AsCanAnniv.jpg',
 	},
 	{
 		category: 'data-literacy',
@@ -920,7 +918,7 @@ const rawEvents = [
 		text: 'Diese Dokumentation ist das Ergebnis des Kurses Ethik im Studiengang Kommunikationsdesign an der HTW-Berlin. Im Wintersemester 2011/12 befragten die Studierenden dieses Kurses Designdienstleistende zu vorher erarbeiteten Fragen zur Ethik im Designberuf. Die einzelnen Interviews wurden in kleinen Teams durchgeführt.',
 		startDate: new Date('2013-01-06T23:00:00.000Z'),
 		type: 'video',
-		videourlFallsEinVideoHinzugefgtWerdenSoll: 'https://vimeo.com/69492462',
+		video: 'https://vimeo.com/69492462',
 	},
 	{
 		category: 'design-attitude',
