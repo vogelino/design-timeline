@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 import { combineCssClasses } from '../../helpers/styleHelper';
 
 const TopicDescription = ({
@@ -16,7 +17,10 @@ const TopicDescription = ({
 		style={{ backgroundColor }}
 	>
 		<h4 className="topicsList_itemdescriptiontitle">{title}</h4>
-		<p className="topicsList_itemdescriptioncontent">{description}</p>
+		<ReactMarkdown
+			className="topicsList_itemdescriptioncontent"
+			source={description}
+		/>
 	</section>
 );
 
