@@ -21,6 +21,10 @@
 	line-height: 60px;
 }
 
+.header_infolink {
+	cursor: help;
+}
+
 .header_legend,
 .header_legenditem {
 	display: inline-block;

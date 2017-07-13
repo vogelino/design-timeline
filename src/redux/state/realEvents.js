@@ -684,9 +684,7 @@ const rawEvents = [
 		startDate: new Date('2030-06-04T22:00:00.000Z'),
 		type: 'text',
 		future: 'extreme',
-		externalLinks: [
-			'https://jscfeatures.jsc.nasa.gov/jscfeatures/images/hires/jsc2004e45077-AsCanAnniv.jpg',
-		],
+		titleImage: 'https://jscfeatures.jsc.nasa.gov/jscfeatures/images/hires/jsc2004e45077-AsCanAnniv.jpg',
 	},
 	{
 		category: 'data-literacy',

@@ -1,0 +1,123 @@
+.introscreen {
+	top: 0;
+	left: 0;
+	background: #003F71;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	transition: opacity 1500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	transition-delay: 500ms;
+	font-smoothing: antialiased;
+}
+
+.introscreen--hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.introscreen--visible {
+	opacity: 1;
+}
+
+.introscreen_content {
+	position: relative;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 178px 0 200px;
+	height: 100%;
+	left: 50%;
+	width: 490px;
+	transform: translateX(-50%);
+	z-index: 2;
+}
+
+.introscreen_content li,
+.introscreen_content p {
+	font-size: 16px;
+	line-height: 20px;
+	margin: 0 0 16px 0;
+}
+
+.introscreen_start-title {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	padding: 8px 12px;
+	display: inline-block;
+	font-size: 1.5em;
+	color: white;
+	background-color: #0087F2;
+	border-radius: 2px;
+	font-weight: bold;
+	margin-bottom: 32px;
+}
+
+.introscreen_start-title::selection {
+	color: #b500c2;
+}
+
+.introscreen_start-text {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow-y: auto;
+	float: left;
+	color: #71a4cd;
+}
+
+.introscreen_start-button {
+	cursor: pointer;
+	outline: none;
+	margin-top: 60px;
+	border-radius: 2px;
+	color: #0087F2;
+	background-color: white;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 120px;
+	left: 0;
+	font-weight: bold;
+	border: none;
+	font-size: 14px;
+	font-family: 'Replica', sans-serif;
+	transition: background 100ms ease-out, color 100ms ease-out;
+}
+
+.introscreen_start-button:hover {
+	background: #0087F2;
+	color: white;
+}
+
+.introscreen_start-button:active {
+	box-shadow: none;
+	transition: .1s;
+}
+
+.introscreen_ocean {
+	width: 6400px;
+	height: 792px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: center;
+	transform: translate(-49%, -36%) rotate(-51deg);
+	z-index: 1;
+	overflow: hidden;
+}
+
+.introscreen_wave {
+	background: transparent url(../../images/wave.gif) repeat-x;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	margin-left: -1px;
+	animation: wave 35s cubic-bezier(.36, .45, .63, .53) infinite;
+}
+
+@keyframes wave {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(-1600px); }
+}
