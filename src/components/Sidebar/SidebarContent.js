@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import Mayre from 'mayre';
 import ReactPlayer from 'react-player';
 import 'moment/locale/de';
 import SidebarLinksList from './SidebarLinksList';
@@ -24,21 +23,12 @@ const SidebarContent = ({
 }) => (
 	<div className="sidebar_content" id={`sidebar_content-${id}`}>
 		<SidebarCategory category={category} type={type} />
-		<Mayre
-			of={<SidebarImage url={titleImage || ''} credits={mediaCredits || ''} />}
-			when={type !== 'video' && Boolean(titleImage)}
-		/>
-		<Mayre
-			of={<ReactPlayer {...{ url: video || '', width: 280, height: 160 }} />}
-			when={type === 'video' && Boolean(video)}
-		/>
+		{type !== 'video' && titleImage ? <SidebarImage url={titleImage} credits={mediaCredits} /> : null}
+		{type === 'video' && video ? <ReactPlayer url={video} width={280} height={160} /> : null}
 		<h1 className="sidebar_title">{title}</h1>
 		<h2 className="sidebar_date">{moment(startDate).format('LL')}</h2>
 		<p className="sidebar_description">{text}</p>
-		<Mayre
-			of={<SidebarLinksList {...{ externalLinks }} />}
-			when={Boolean(externalLinks.length)}
-		/>
+		{externalLinks.length ? <SidebarLinksList {...{ externalLinks }} /> : null }
 	</div>
 );
 
