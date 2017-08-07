@@ -51,5 +51,6 @@
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/vogelino/design-timeline/issues"
-	}
+	},
+	"homepage": "http://design.fh-potsdam.de/design-timeline"
 }
