@@ -1,11 +1,10 @@
 {
 	"name": "design-timeline",
 	"version": "1.0.0",
-	"description": "A timeline showing the evolution of design fields over time",
 	"engines": {
-		"node": "7.10.0",
-		"yarn": "0.24.4"
+		"node": "12.14.1"
 	},
+	"description": "A timeline showing the evolution of design fields over time",
 	"dependencies": {
 		"casual-cjs": "^1.5.10",
 		"d3-scale": "^1.0.6",
@@ -40,6 +39,7 @@
 		"start": "serve -s build",
 		"dev": "react-scripts start",
 		"build": "react-scripts build",
+		"now-build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"lint-scripts": "eslint ./src"
 	},
@@ -51,6 +51,5 @@
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/vogelino/design-timeline/issues"
-	},
-	"homepage": "http://design.fh-potsdam.de/design-timeline"
+	}
 }
