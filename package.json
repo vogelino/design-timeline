@@ -7,7 +7,7 @@
 	"description": "A timeline showing the evolution of design fields over time",
 	"dependencies": {
 		"casual-cjs": "^1.5.10",
-		"d3-scale": "^1.0.6",
+		"d3-scale": "^4.0.2",
 		"enzyme": "^2.8.2",
 		"moment": "^2.27.0",
 		"moment-range": "^3.0.3",
